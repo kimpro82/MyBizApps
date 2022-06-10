@@ -1,4 +1,5 @@
-# ExcelToMarkdown
+# Excel To Markdown
+
 Convert Excel data to Github markdown table
 
 

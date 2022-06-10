@@ -5,10 +5,13 @@ for my friend JW Park
 
 ### \<List>
 
-- [Repurchase Tendency (2022.06.10)]()
+- [Repurchase Tendency (2022.06.10)](#repurchase-tendency-20220610)
 
 
 ## [Repurchase Tendency (2022.06.10)](#list)
+
+- Find Repurchase Rate within 30/90/180 days by the Number of Repurchase
+- Refresh the Pivot Table and Chart automatically
 
 ![Repurchase Tendency](Images/VBA_RepurchaseTendency.gif)
 
