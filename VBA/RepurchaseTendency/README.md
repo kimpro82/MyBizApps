@@ -13,7 +13,7 @@ for my friend JW Park
 - Find Repurchase Rate within 30/90/180 days by the Number of Repurchase
 - Refresh the Pivot Table and Chart automatically
 
-![Repurchase Tendency](Images/VBA_RepurchaseTendency.gif)
+![Repurchase Tendency](Images/RepurchaseTendency.gif)
 
 #### RepurchaseTendency.bas
 ```vba
