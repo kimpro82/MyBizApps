@@ -2,6 +2,9 @@
 ' 2022.06.10 Kimpro in Uebermensch Technology
 
 
+Option Explicit
+
+
 ' Set the zero point of data / ★ dependent on the sheet's figure
 Private Sub SetZero( _
     ByRef dataZero As Range, _

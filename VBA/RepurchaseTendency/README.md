@@ -17,6 +17,9 @@ for my friend JW Park
 
 #### RepurchaseTendency.bas
 ```vba
+Option Explicit
+```
+```vba
 ' Set the zero point of data / ★ dependent on the sheet's figure
 Private Sub SetZero( _
     ByRef dataZero As Range, _
