@@ -23,3 +23,4 @@ Business? \??
 - [Sample Number 2 (2020.06.16)](R/SampleNumber#sample-number-2-2020616)
 - Sample Number (2020.06.10)
 - [Grade Cancel Effect (2019.07.19)](R/GradeCancelEffect#grade-cancel-effect-20190719)
+- [CF Affection (2019.05.25)](R/CFAffection#cf-affection-20190525)

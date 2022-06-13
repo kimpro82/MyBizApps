@@ -10,7 +10,6 @@ get each branch's sample number for inspection work
 
 
 ## [Sample Number 2 (2020.6.16)](#list)
-get each branch's sample number for inspection work
 
 ```R
 ###################################

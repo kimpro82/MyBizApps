@@ -1,6 +1,6 @@
-# Sample Number
+# Grade Cancel Effect
 
-get each branch's sample number for inspection work
+try simulating grade cancel effect for my sister
 
 
 ### \<List>
@@ -9,7 +9,6 @@ get each branch's sample number for inspection work
 
 
 ## [Grade Cancel Effect (2019.07.19)](#list)
-try simulating grade cancel effect for my sister
 1) generate grade data (because my sister's real GPA can't be opened.ㅋㅋ)
 2) plot
 
