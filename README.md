@@ -16,3 +16,9 @@ Business? \??
 - [Excel To Markdown 2 (2022.02.06)](Python/ExcelToMarkdown#excel-to-markdown-2-20220206)
 - [Excel To Markdown 1 (2022.02.05)](Python/ExcelToMarkdown#excel-to-markdown-1-20220205)  
 - [Image Blending (2022.02.27)](Python/ImageBlending#image-blending-20220227)
+
+
+#### R
+
+- [Sample Number 2 (2020.06.16)](R/SampleNumber#sample-number-2-2020616)
+- Sample Number (2020.06.10)
