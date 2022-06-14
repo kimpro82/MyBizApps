@@ -1,6 +1,6 @@
 # Image Blending
 
-God bless Ukraine
+&nbsp; **Pray for Ukraine**
 
 
 ### \<List>
@@ -12,7 +12,6 @@ God bless Ukraine
 - A practice to blend two images by using `cv2`
 - Generate Ukrainian flag with `numpy`
 - Reference ☞ https://opencv-python.readthedocs.io/
-- **Pray for Ukraine**
 
 #### ImageBlending.py
 ```py

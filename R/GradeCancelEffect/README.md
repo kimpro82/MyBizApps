@@ -1,6 +1,6 @@
 # Grade Cancel Effect
 
-try simulating grade cancel effect for my sister
+&nbsp; try simulating grade cancel effect for my sister
 
 
 ### \<List>
@@ -9,6 +9,7 @@ try simulating grade cancel effect for my sister
 
 
 ## [Grade Cancel Effect (2019.07.19)](#list)
+
 1) generate grade data (because my sister's real GPA can't be opened.ㅋㅋ)
 2) plot
 
@@ -68,7 +69,6 @@ windows(width=15, height=8)
       abline(h=mean(sort(평점)[6:len]), col="blue")
 ```
 ![Grade_Cancel_Effect](Images/Grade_Cancel_Effect.png)
-
 
 ```R
 # 2.1 values

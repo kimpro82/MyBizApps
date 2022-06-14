@@ -1,7 +1,7 @@
 # CF Affection
 
-\* For my friend *JW Park* who wants to measure the affection of TV CF  
-\* It demands simply CF time schedule and target frequency(ex. app download time), not heavy tracker.
+&nbsp; \* For my friend *JW Park* who wants to measure the affection of TV CF  
+&nbsp; \* It demands simply CF time schedule and target frequency(ex. app download time), not heavy tracker.
 
 
 ### \<List>
