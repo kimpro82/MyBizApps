@@ -10,8 +10,8 @@
 
 ## [RGB (2017.04.14)](#list)
 
-\* using `plot3d()`, converting on coordinate plane  
-\* generating RGB data with a sigmoid function
+&nbsp; \* using `plot3d()`, converting on coordinate plane  
+&nbsp; \* generating RGB data with a sigmoid function
 
 ```R
 ## Install required library packages (only at first)
@@ -28,7 +28,7 @@ colors
 
 plot3d(colors, size=10, col=rgb(colors/255))
 ```
-&nbsp; \* '/255' : because rgb() requires values between 0 and 1.
+&nbsp; \* '/255' : because rgb() requires values between 0 and 1.  
 ![RGB_Plotting_1](Images/RGB_Plotting_1.PNG)
 
 #### 2. Generate sample data by Uniform dist.
