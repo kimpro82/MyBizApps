@@ -53,7 +53,7 @@ def excelToMarkdown(path, ext, sheet) :
             df = pd.read_excel(path, sheet_name = sheet)
         else :
             df = pd.read_excel(path)
-    elif  ext.lower() == ".csv" :
+    elif ext.lower() == ".csv" :
         df = pd.read_csv(path)
     else :
         print("The process doesn't supprt", ext, "file.")
