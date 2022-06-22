@@ -12,8 +12,8 @@
 
 ## [Excel To Markdown 3 (2022.06.22)](#list)
 
-- Input arguments though `.bat` file, don't need to modify `.py` file anymore
-- Can extract `.md` file not only from the 1st sheet, but also any other sheet
+- Input arguments though `.bat` file, don't need to modify `.py` file directly anymore
+- Extract `.md` file not only from the 1st sheet, but also any other sheet
 - Bug fix : don't change any other words including "nan" except pure "nan"
 
 #### `ExcelToMarkdown3.xlsx`
@@ -29,8 +29,9 @@ Sheet2 : '1'
 | Col1 | Col2 |
 | :-- | :-- |
 | Finance | finance |
-| Fice | fice |
 | Financial | financial |
+| Fice | fice |
+| Ficial | ficial |
 | Artificial | artificial |
 
 #### `ExcelToMarkdown3.bat`
@@ -75,9 +76,11 @@ def ArguementParsing() :
 ```python
 # Get the file path
 def getFilePath(fileName, sheet) :
+
     ……
     saveFilePath = root + "_" + str(sheet) + ".md"
     ……
+
 ```
 ```python
 # Read data as a pandas dataframe from excel
@@ -145,36 +148,38 @@ if __name__ == "__main__" :
     Quit()
 ```
 
-#### Output : `ExcelToMarkdown3_.md`, `ExcelToMarkdown3_a.md`
+#### Output : `ExcelToMarkdown3_.md`
 ```md
 | Col1 | Col2 |
 | :-: | :-: |
-| Nan | |
+| Nan |  |
 | NAND | nand |
 | Nanan | nanan |
-| . | |
+| . |  |
 ```
 | Col1 | Col2 |
 | :-: | :-: |
-| Nan | |
+| Nan |  |
 | NAND | nand |
 | Nanan | nanan |
-| . | |
+| . |  |
 
-#### Output : `ExcelToMarkdown3_1.md`
+#### Output : `ExcelToMarkdown3_1.md`, `ExcelToMarkdown3_a.md`
 ```md
 | Col1 | Col2 |
 | :-: | :-: |
 | Finance | finance |
-| Fice | fice |
 | Financial | financial |
+| Fice | fice |
+| Ficial | ficial |
 | Artificial | artificial |
 ```
 | Col1 | Col2 |
 | :-: | :-: |
 | Finance | finance |
-| Fice | fice |
 | Financial | financial |
+| Fice | fice |
+| Ficial | ficial |
 | Artificial | artificial |
 
 
