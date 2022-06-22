@@ -13,7 +13,7 @@
 ## [Excel To Markdown 3 (2022.06.22)](#list)
 
 - Input arguments though `.bat` file, don't need to modify `.py` file directly anymore
-- Extract `.md` file not only from the 1st sheet, but also any other sheet
+- Extract `.md` file not only from the 1st sheet, but also from any other sheet
 - Bug fix : don't change any other words including "nan" except pure "nan"
 
 #### `ExcelToMarkdown3.xlsx`
