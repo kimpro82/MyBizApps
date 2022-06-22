@@ -12,6 +12,10 @@
 
 ## [Excel To Markdown 3 (2022.06.22)](#list)
 
+- Input arguments though `.bat` file, don't need to modify `.py` file anymore
+- Can extract `.md` file not only from the 1st sheet, but also any other sheet
+- Bug fix : don't change any other words including "nan" except pure "nan"
+
 #### `ExcelToMarkdown3.xlsx`
 Sheet1 : 'a'
 | Col1 | Col2 |
@@ -20,6 +24,7 @@ Sheet1 : 'a'
 | NAND | nand |
 | Nanan | nanan |
 | . | |
+
 Sheet2 : '1'
 | Col1 | Col2 |
 | :-- | :-- |
@@ -85,8 +90,7 @@ def excelToMarkdown(path, ext, sheet) :
             df = pd.read_excel(path, sheet_name = sheet)
         else :
             df = pd.read_excel(path)
-    elif …… :
-        ……
+    ……
     else :
         ……
         Quit()
@@ -130,15 +134,13 @@ if __name__ == "__main__" :
             md = excelToMarkdown(path, ext, sheet)
             ……
         else :
-            answer = input(path + " has already existed. Will you overwriter? (y/n) ")
+            ……
             if answer.lower() in ("y", "yes") :
                 md = excelToMarkdown(path, ext, sheet)
                 ……
-            else :
-                ……
+            ……
 
-    else :
-        ……
+    ……
 
     Quit()
 ```
