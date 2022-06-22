@@ -1,6 +1,6 @@
 | Col1 | Col2 |
 | :-: | :-: |
-| Nan | |
+| Nan |  |
 | NAND | nand |
 | Nanan | nanan |
-| . | |
+| . |  |

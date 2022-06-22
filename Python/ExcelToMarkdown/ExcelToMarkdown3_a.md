@@ -1,6 +1,7 @@
 | Col1 | Col2 |
 | :-: | :-: |
-| Nan | |
-| NAND | nand |
-| Nanan | nanan |
-| . | |
+| Finance | finance |
+| Financial | financial |
+| Fice | fice |
+| Ficial | ficial |
+| Artificial | artificial |
