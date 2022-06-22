@@ -5,8 +5,175 @@
 
 ### \<List>
 
+- [Excel To Markdown 3 (2022.06.22)](#excel-to-markdown-3-20220622)
 - [Excel To Markdown 2 (2022.02.06)](#excel-to-markdown-2-20220206)
 - [Excel To Markdown 1 (2022.02.05)](#excel-to-markdown-1-20220205)
+
+
+## [Excel To Markdown 3 (2022.06.22)](#list)
+
+#### `ExcelToMarkdown3.xlsx`
+Sheet1 : 'a'
+| Col1 | Col2 |
+| :-- | :-- |
+| Nan | nan |
+| NAND | nand |
+| Nanan | nanan |
+| . | |
+Sheet2 : '1'
+| Col1 | Col2 |
+| :-- | :-- |
+| Finance | finance |
+| Fice | fice |
+| Financial | financial |
+| Artificial | artificial |
+
+#### `ExcelToMarkdown3.bat`
+```bat
+python ExcelToMarkdown3.py
+python ExcelToMarkdown3.py ExcelToMarkdown3.xlsx
+python ExcelToMarkdown3.py ExcelToMarkdown3.xlsx 1
+python ExcelToMarkdown3.py ExcelToMarkdown3.xlsx a
+python ExcelToMarkdown3.py ExcelToMarkdown3.xlsx a b
+
+@echo --------------------------------------------------------------------------------
+```
+
+#### Mainly changed parts of `ExcelToMarkdown3.py`
+```python
+import sys                                                                      # for argument parsing from .bat file
+……
+```
+```python
+# Get the arguments
+def ArguementParsing() :
+
+    args = sys.argv
+
+    if len(args) >= 2 and len(args) <= 3 :                                      # sys.argv[0] is always given as the script file name
+
+        fileName = args[1]
+        sheet = ''
+
+        if len(args) == 3 :
+            if args[2].isdigit() == True :
+                sheet = int(args[2])
+            else :
+                sheet = args[2]
+
+        return fileName, sheet
+
+    else :
+        print("It requires 1~2 arguements. : file name(necessary), sheet name or number(optional)")
+        Quit()
+```
+```python
+# Get the file path
+def getFilePath(fileName, sheet) :
+    ……
+    saveFilePath = root + "_" + str(sheet) + ".md"
+    ……
+```
+```python
+# Read data as a pandas dataframe from excel
+def excelToMarkdown(path, ext, sheet) :
+
+    ……
+
+    if ext.lower() in excelExtension :
+        if sheet != '' :
+            df = pd.read_excel(path, sheet_name = sheet)
+        else :
+            df = pd.read_excel(path)
+    elif …… :
+        ……
+    else :
+        ……
+        Quit()
+
+    # Print markdown table
+    print(path, sheet)
+    ……
+
+    # Modify details
+    ……
+    md = re.sub(" nan ", "  ", md)                                              # 'finance` is safe
+
+    print(md[:500], end = '\n')                                                 # string
+
+    ……
+```
+```python
+# Quit
+def Quit() :
+
+    print('-' * 80)
+    sys.exit()
+```
+```python
+# Run
+if __name__ == "__main__" :
+
+    # Get the arguments
+    fileName, sheet = ArguementParsing()
+    print(fileName, sheet)
+
+    # The stem of the filename should not include '.'
+    path, ext, saveFilePath = getFilePath(fileName, sheet)
+
+    # Check if the file exists
+    if os.path.isfile(path) :
+        ……
+
+        # Check if the overwriting risk exists and save as a .md file
+        if os.path.isfile(saveFilePath) == False :
+            md = excelToMarkdown(path, ext, sheet)
+            ……
+        else :
+            answer = input(path + " has already existed. Will you overwriter? (y/n) ")
+            if answer.lower() in ("y", "yes") :
+                md = excelToMarkdown(path, ext, sheet)
+                ……
+            else :
+                ……
+
+    else :
+        ……
+
+    Quit()
+```
+
+#### Output : `ExcelToMarkdown3_.md`, `ExcelToMarkdown3_a.md`
+```md
+| Col1 | Col2 |
+| :-: | :-: |
+| Nan | |
+| NAND | nand |
+| Nanan | nanan |
+| . | |
+```
+| Col1 | Col2 |
+| :-: | :-: |
+| Nan | |
+| NAND | nand |
+| Nanan | nanan |
+| . | |
+
+#### Output : `ExcelToMarkdown3_1.md`
+```md
+| Col1 | Col2 |
+| :-: | :-: |
+| Finance | finance |
+| Fice | fice |
+| Financial | financial |
+| Artificial | artificial |
+```
+| Col1 | Col2 |
+| :-: | :-: |
+| Finance | finance |
+| Fice | fice |
+| Financial | financial |
+| Artificial | artificial |
 
 
 ## [Excel To Markdown 2 (2022.02.06)](#list)
