@@ -149,6 +149,9 @@ if __name__ == "__main__" :
 ```
 
 #### Output : `ExcelToMarkdown3_.md`
+```bat
+python ExcelToMarkdown3.py ExcelToMarkdown3.xlsx
+```
 ```md
 | Col1 | Col2 |
 | :-: | :-: |
@@ -165,6 +168,10 @@ if __name__ == "__main__" :
 | . |  |
 
 #### Output : `ExcelToMarkdown3_1.md`, `ExcelToMarkdown3_a.md`
+```bat
+python ExcelToMarkdown3.py ExcelToMarkdown3.xlsx 1
+python ExcelToMarkdown3.py ExcelToMarkdown3.xlsx a
+```
 ```md
 | Col1 | Col2 |
 | :-: | :-: |
@@ -181,6 +188,15 @@ if __name__ == "__main__" :
 | Fice | fice |
 | Ficial | ficial |
 | Artificial | artificial |
+
+#### Output : etc
+```bat
+python ExcelToMarkdown3.py
+python ExcelToMarkdown3.py ExcelToMarkdown3.xlsx a b
+```
+```
+It requires 1~2 arguements. : file name(necessary), sheet name or number(optional)
+```
 
 
 ## [Excel To Markdown 2 (2022.02.06)](#list)
