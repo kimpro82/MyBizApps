@@ -1,3 +1,6 @@
+Option Explicit
+
+
 Sub Update()
 
     PivotTables("PivotTable1").PivotCache.Refresh
