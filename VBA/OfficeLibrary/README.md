@@ -13,6 +13,8 @@ Reading leads you a better slav …… employee
 - Update plural pivot tables at the same time with one click
 - Somewhat shameful code …… but it seems able to be improved more
 
+![Office Library Summary](Images/OfficeLibrary.png)
+
 #### OfficeLibrary.bas
 ```vba
 Option Explicit
