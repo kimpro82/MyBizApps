@@ -5,7 +5,7 @@ a requested code
 
 ### \<List>
 
-- [Find and Change a Substring (2022.08.12)](#)
+- [Find and Change a Substring (2022.08.12)](#find-and-change-a-substring-20220812)
 
 
 ## [Find and Change a Substring (2022.08.12)](#list)
