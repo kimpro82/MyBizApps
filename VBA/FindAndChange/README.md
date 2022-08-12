@@ -26,7 +26,7 @@ Sub FindAndChange()
     Dim dataZero As Range                                   ' dataZero  : the zeropoint to start data
     Dim str As String                                       ' str       : the string to search
     Dim length As Integer                                   ' length    : the length of str
-    Dim row As Integer                                      ' row       : the number of rows that contains data from dataZero
+    Dim row As Integer                                      ' row       : the number of rows that contain data from dataZero
 
     Set dataZero = Range("A1")
     str = Range("D1").Value
