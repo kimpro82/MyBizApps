@@ -42,7 +42,18 @@ Sub FindAndChange()
         idx = InStr(1, dataZero.Offset(r, 0), str)          ' idx == 0 means the target substring is absent
         If idx > 0 Then
             With dataZero.Offset(r, 0).Characters(Start:=idx, length:=length).Font
+                ' .Name = "맑은 고딕"
+                ' .FontStyle = "보통"
+                ' .Size = 11
+                ' .Strikethrough = False
+                ' .Superscript = False
+                ' .Subscript = False
+                ' .OutlineFont = False
+                ' .Shadow = False
+                ' .Underline = xlUnderlineStyleNone
                 .Color = RGB(255, 0, 0)                     ' RGB(255, 0, 0) : Red
+                ' .TintAndShade = 0
+                ' .ThemeFont = xlThemeFontMinor
             End With
         End If
     Next r
