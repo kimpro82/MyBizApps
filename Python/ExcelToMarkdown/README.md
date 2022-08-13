@@ -14,7 +14,7 @@
 
 - Input arguments though `.bat` file, don't need to modify `.py` file directly anymore
 - Extract `.md` file not only from the 1st sheet, but also from any other sheet
-- Bug fix : don't change any other words including "nan" except pure "nan"
+- Bug fix : don't replace any other words including "nan" except pure "nan"
 
 #### `ExcelToMarkdown3.xlsx`
 Sheet1 : 'a'
@@ -45,7 +45,7 @@ python ExcelToMarkdown3.py ExcelToMarkdown3.xlsx a b
 @echo --------------------------------------------------------------------------------
 ```
 
-#### Mainly changed parts of `ExcelToMarkdown3.py`
+#### Mainly replaced parts of `ExcelToMarkdown3.py`
 ```python
 import sys                                                                      # for argument parsing from .bat file
 ……
@@ -206,7 +206,7 @@ It requires 1~2 arguements. : file name(necessary), sheet name or number(optiona
   - Ask if overwrite `.md` file
   - Improve entire code structure : seperate functions of `getFilePath()` `excelToMarkdown()` `saveMarkdown()`
   - Get the `.md` file name for saving by `os.path.splitext()` instead of `re`
-  - Change sample `.csv` file that can test more markdown syntax
+  - Replace sample `.csv` file that can test more markdown syntax
 
 #### ExcelToMarkdown2.csv
 ```csv

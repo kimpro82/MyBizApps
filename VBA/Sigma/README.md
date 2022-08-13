@@ -13,7 +13,7 @@
 
 ## [Sigma4 (2021.07.26)](#my-vba-practice)
 
-- Change the calculation method from loop to **[Faulhaber's Formula](https://en.wikipedia.org/wiki/Faulhaber%27s_formula)** (make faster)
+- Replace the calculation method from loop to **[Faulhaber's Formula](https://en.wikipedia.org/wiki/Faulhaber%27s_formula)** (make faster)
 - Support operations for k ~ k^4
 
 ![Sigma4](Images/Sigma4.PNG)

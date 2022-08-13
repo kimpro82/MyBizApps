@@ -16,7 +16,7 @@ Business? \??
 
 #### VBA
 
-- [Find and Change a Substring (2022.08.12)](VBA/FindAndChange#find-and-change-a-substring-20220812)
+- [Find and Replace a Substring (2022.08.12)](VBA/FindAndReplace#find-and-replace-a-substring-20220812)
 - [Office Library Management (2022.07.13)](VBA/OfficeLibrary#office-library-management-20220713)
 - [Repurchase Tendency (2022.06.10)](VBA/RepurchaseTendency#repurchase-tendency-20220610)
 - [Sigma4 (2021.07.26)](VBA/Sigma#sigma4-20210726)
