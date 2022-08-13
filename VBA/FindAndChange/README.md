@@ -12,7 +12,7 @@ a requested code
 
 - Change the substring's property partially, not the whole string's in the cell
 
-![Find and Change a Substring](Images/VBA_FindAndChange_20220812.gif)
+![Find and Change a Substring](Images/VBA_FindAndChange.gif)
 
 #### `FindAndChange.bas`
 ```vba
