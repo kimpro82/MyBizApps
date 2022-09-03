@@ -8,7 +8,7 @@
 
 ## [Browser Refresh (2022.09.03)](#list)
 
-- Infinite click to the *refresh* button on the *Edge* browser with `Ctrl`+`Shift`+`j`
+- Click infinitely to the *refresh* button on the *Edge* browser with `Ctrl`+`Shift`+`j`
 - Stop the loop with `Ctrl`+`Shift`+`k`
 - It is crazy to avoid the existing hot keys.
 
