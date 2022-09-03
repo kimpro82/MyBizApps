@@ -3,7 +3,7 @@
 
 ### \<List>
 
-- [Browser Refresh (2022.09.03)](#find-and-replace-a-substring-20220812)
+- [Browser Refresh (2022.09.03)](#browser-refresh-20220903)
 
 
 ## [Browser Refresh (2022.09.03)](#list)

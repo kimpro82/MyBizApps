@@ -36,4 +36,4 @@ Business? \??
 
 #### Auto Hot Key
 
-- [Browser Refresh (2022.09.03)](#)
+- [Browser Refresh (2022.09.03)](AutoHotKey/BrowserRefresh#browser-refresh-20220903)
