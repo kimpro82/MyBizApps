@@ -27,6 +27,8 @@ Business? \??
 
 #### R
 
+- [Reach The Goal 1 (2022.10.31)](./R/ReachTheGoal/README.md#reach-the-goal-1-20221031)
+- [Reach The Goal 0 (2022.10.31)](./R/ReachTheGoal/README.md#reach-the-goal-0-20221031)
 - [Sample Number 2 (2020.06.16)](R/SampleNumber#sample-number-2-2020616)
 - Sample Number (2020.06.10)
 - [Grade Cancel Effect (2019.07.19)](R/GradeCancelEffect#grade-cancel-effect-20190719)
