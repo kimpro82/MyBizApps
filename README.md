@@ -36,6 +36,12 @@ Business? \??
 - [RGB (2017.04.14)](R/RGB#rgb-20170414)
 
 
+#### Shell
+
+- [Count Text 2 : Bash (2023.02.24)](./Shell/CountText/README.md#count-text-2--bash-20230224)
+- [Count Text 1 : Batch File (2023.02.24)](./Shell/CountText/README.md#count-text-1--batch-file-20230224)
+
+
 #### Auto Hot Key
 
 - [Browser Refresh (2022.09.03)](AutoHotKey/BrowserRefresh#browser-refresh-20220903)
