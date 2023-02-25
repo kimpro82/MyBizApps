@@ -11,7 +11,7 @@ Count characters, words and lines in a text file
 
 ## [Count Text 2 : Bash (2023.02.24)](#list)
 
-- Rarely edited from **ChatGPT**'s base code
+- Rarely edited from [**ChatGPT**'s base code](https://github.com/kimpro82/MyBizApps/issues/24#issuecomment-1442874538)
 - It works well both with English and Korean, unlike [the below `.bat` code](#count-text-1--batch-file-20230224).
 - `wc` command is very powerful!  
   : Maybe it counts only the line replacements except `EOF`.  
@@ -95,7 +95,7 @@ Count characters, words and lines in a text file
 
 ## [Count Text 1 : Batch File (2023.02.24)](#list)
 
-- The base codes are from **ChatGPT**
+- [The base codes](https://github.com/kimpro82/MyBizApps/issues/24#issue-1597984032) are from **ChatGPT**
 - Batch File doesn't support to count a string's length!
 - Successful to count words and lines, but failed to do characters
 - But I still love Microsoft :heart:
