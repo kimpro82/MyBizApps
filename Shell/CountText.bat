@@ -23,7 +23,7 @@ for /f "tokens=*" %%l in ('type %file%') do (
     for %%w in (%%l) do (
 
         @REM test : ok
-        echo %%w
+        @REM echo %%w
 
         set /a words+=1
     )
