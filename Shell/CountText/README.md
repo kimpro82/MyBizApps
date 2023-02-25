@@ -14,7 +14,7 @@ Count characters, words and lines in a text file
 - It works well both with English and Korean, unlike [the below `.bat` code](#count-text-1--batch-file-20230224).
 - `wc` command is very powerful!  
   : Maybe it counts only the line replacements except `EOF`.  
-  &nbsp;&nbsp;(So The last empty line should be needed.1)
+  &nbsp;&nbsp;(So the last empty line should be needed.)
 
   <details open="">
     <summary>Codes : CountText.sh</summary>
