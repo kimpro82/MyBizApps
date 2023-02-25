@@ -184,5 +184,5 @@ Count characters, words and lines in a text file
   Number of words      : 1
   Number of lines      : 5
   ```
-  Even counting words is also failed.
+  Even counting words is also failed in Korean.
   </details>
