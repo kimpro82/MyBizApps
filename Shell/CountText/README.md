@@ -47,6 +47,7 @@ Count characters, words and lines in a text file
   To be a better man
 
   ```
+  ※ Source : Robbie Williams / Better Man (2001)
   ```
   Number of characters : 106
   Number of words      : 23
@@ -65,6 +66,7 @@ Count characters, words and lines in a text file
   그것만이 언제나 내 바램이죠
 
   ```
+  ※ Source : 권진원 / 진심 (2003)
   ```
   Number of characters : 77
   Number of words      : 20
@@ -80,6 +82,7 @@ Count characters, words and lines in a text file
   That's me
 
   ```
+  ※ Source : B.I / Waterfall (2021)
   ```
   Number of characters : 33
   Number of words      : 7
@@ -152,6 +155,7 @@ Count characters, words and lines in a text file
   To be a better man
 
   ```
+  ※ Source : Robbie Williams / Better Man (2001)
   ```
   Number of characters : 0
   Number of words      : 23
@@ -171,6 +175,7 @@ Count characters, words and lines in a text file
   그것만이 언제나 내 바램이죠
 
   ```
+  ※ Source : 권진원 / 진심 (2003)
   ```
   Number of characters : 0
   Number of words      : 1
