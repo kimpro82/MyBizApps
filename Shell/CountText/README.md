@@ -26,9 +26,9 @@ Count characters, words and lines in a text file
   echo -n "Enter the file name: "
   read file
 
-  chars=$(wc -m < "$file" | tr -d ' ')
-  words=$(wc -w < "$file" | tr -d ' ')
-  lines=$(wc -l < "$file" | tr -d ' ')
+  chars=$(wc -m < "$file")
+  words=$(wc -w < "$file")
+  lines=$(wc -l < "$file")
 
   echo "Number of characters : $chars"
   echo "Number of words      : $words"
