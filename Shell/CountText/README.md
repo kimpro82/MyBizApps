@@ -89,7 +89,7 @@ Count characters, words and lines in a text file
   Number of words      : 7
   Number of lines      : 2
   ```
-  `That's` seems to be regarded as one words because `'` is not a defined seperator.
+  `That's` seems to be regarded as one words because `'` is not a defined separator.
   </details>
 
 
