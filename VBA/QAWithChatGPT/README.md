@@ -18,7 +18,7 @@ AI is definitely Excel material!
   ![QA With ChatGPT v0.2](./Images/QAWithChatGPT_V0.2.PNG)
 
 - Future Improvements
-  - Resolve struggles with *JSON*
+  - Resolve struggles related to *JSON*
     - Extract and refine `content`
     - Print Korean characters properly
     - Output other parameters separately in individual cells
