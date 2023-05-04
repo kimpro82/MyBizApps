@@ -12,7 +12,8 @@ AI is definitely Excel material!
 
 - Features
   - Succeed in obtaining responses for some models of the `/v1/chat/completions` endpoint.
-  - Call the max token value, descrition, training period of the choosed model automatically (not with VBA, but with excel function `vlookup()`)
+  - Call the max token value, descrition, training period of the chosen model automatically  
+  (not with VBA, but with the excel function `vlookup()`)
 
   ![QA With ChatGPT v0.2](./Images/QAWithChatGPT_V0.2.PNG)
 
@@ -25,10 +26,10 @@ AI is definitely Excel material!
   - Improve the speed of the feature that detects model changes and automatically adjusts the initial token value to be no greater than the maximum
 
 - Where is the previous version? (crazy ad hoc documentation)  
-  ☞ [Simple Q&A with ChatGPT : Trial (2023.05.02)](https://github.com/kimpro82/MyPractice/blob/master/VBA/README.md#simple-qa-with-chatgpt--trial-20230502)
+  ☞ [kimpro82/MyPractice](https://github.com/kimpro82/MyPractice) > [Simple Q&A with ChatGPT : Trial (2023.05.02)](https://github.com/kimpro82/MyPractice/blob/master/VBA/README.md#simple-qa-with-chatgpt--trial-20230502)
 
 - Codes
-  <details open="">
+  <details>
     <summary>QAWithChatGPT_0.2.bas</summary>
 
   ```vba
