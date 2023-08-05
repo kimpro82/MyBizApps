@@ -16,6 +16,7 @@ Business? \??
 
 #### VBA
 
+  - [Load CSV (2023.08.04)](./VBA/LoadCSV/README.md#load-csv-20230804)
   - [Q&A with ChatGPT v0.2 (2023.05.03)](./VBA/QAWithChatGPT/README.md#qa-with-chatgpt-v02-20230503)
   - [Find and Replace a Substring (2022.08.12)](./VBA/FindAndReplace/README.md#find-and-replace-a-substring-20220812)
   - [Office Library Management (2022.07.13)](./VBA/OfficeLibrary/README.md#office-library-management-20220713)
