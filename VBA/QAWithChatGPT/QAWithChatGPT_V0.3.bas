@@ -37,7 +37,7 @@ Private Sub SetParameters(ByRef thisType As ParametersType)
     thisType.currentFilePath = ThisWorkbook.path
     thisType.pythonExe = "C:\Python\Python38-64\python.exe"
     thisType.pythonArgs = ".\QAWithChatGPT_V0.3.py"
-    thisType.ymlFilePath = ".\QAWithChatGPT_V0.3.yml"
+    thisType.ymlFilePath = "\QAWithChatGPT_V0.3.yml"
 
 End Sub
 
@@ -163,12 +163,12 @@ Private Sub btnClear_Click()
 
     Application.Calculation = xlManual
 
-        Dim CellLocations As CellLocationsType
-        Call SetCellLocations(CellLocations)
+        Dim Parameters As ParametersType
+        Call SetParameters(Parameters)
 
-        CellLocations.tokensRange.Value = ""
-        CellLocations.questionRange.Value = ""
-        CellLocations.answerRange.Value = ""
+        Parameters.tokensRange.Value = ""
+        Parameters.questionRange.Value = ""
+        Parameters.answerRange.Value = ""
 
     Application.Calculation = xlAutomatic
 
