@@ -12,7 +12,7 @@ AI is definitely Excel material!
 ## [Q&A with ChatGPT v0.3 (2023.08.14)](#list)
 
 - Features : Successfully received unicode string in Korean
-  - Click [Run] Button
+  - Click **[Run]** Button
   - Run *python* code by `Shell` command
     - Request an answer to *ChatGPT* API and receive it into an external `yml` file as `utf-8-sig`
   - Parse the answer string from the `yml` file
