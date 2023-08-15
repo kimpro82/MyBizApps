@@ -1,0 +1,15 @@
+choices:
+- finish_reason: stop
+  index: 0
+  message:
+    content: "\uC624\uB298\uC740 {{\uC624\uB298 \uB0A0\uC9DC}}\uC77C\uC774\uC5D0\uC694\
+      ."
+    role: assistant
+created: 1691996504
+id: chatcmpl-7nLs8l2pC4rBdXHSL590KEM4LEdOA
+model: gpt-3.5-turbo-0613
+object: chat.completion
+usage:
+  completion_tokens: 18
+  prompt_tokens: 32
+  total_tokens: 50
