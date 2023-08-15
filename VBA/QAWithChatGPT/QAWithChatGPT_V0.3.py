@@ -58,7 +58,7 @@ answer      = response.json()
 # print("content(raw)         :", content)
 
 # YAML 파일로 저장
-with open(SAVE_FILE_PATH, "w", encoding='utf-8') as file:
+with open(SAVE_FILE_PATH, "w", encoding='utf-8-sig') as file:
     yaml.dump(answer, file)
 
 # 테스트

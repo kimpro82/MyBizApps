@@ -83,7 +83,7 @@ AI is definitely Excel material!
   ```
   ```py
   # YAML 파일로 저장
-  with open(SAVE_FILE_PATH, "w", encoding='utf-8') as file:
+  with open(SAVE_FILE_PATH, "w", encoding='utf-8-sig') as file:
       yaml.dump(answer, file)
   ```
   ```py
