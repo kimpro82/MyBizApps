@@ -20,6 +20,12 @@ AI is definitely Excel material!
   ![QA With ChatGPT v0.3](./Images/QAWithChatGPT_V0.3.PNG)
 
 - Future Improvements
+  - Fix critical bugs
+    - Proceed to the next line without waiting for the result of Python code execution through the `Shell` command  
+      -> Returns a message that the `yml` document is not created because it is not waited
+      - Reference : [vba WScript.Shell run .exe file with parameter (Stack Overflow)](https://stackoverflow.com/questions/26762566/vba-wscript-shell-run-exe-file-with-parameter)
+    - Read only the first line of the `content` item in the `yml` document
+    - Python code error: Unlike standalone execution, a path issue occurs in `openpyxl.load_workbook()`
   - Use `xlwings` instead of `openpyxl` so that you can interact with Excel sheet in real time without the need to transfer an external `yml` file between *VBA* and *Python*
     - Reference : [Update an Excel sheet in real time using Python (Stack Overflow)](https://stackoverflow.com/questions/50411346/update-an-excel-sheet-in-real-time-using-python)
 
