@@ -45,6 +45,11 @@ Business? \??
   - [Count Text 1 : Batch File (2023.02.24)](./Shell/CountText/README.md#count-text-1--batch-file-20230224)
 
 
+#### COBOL
+
+  - [Diary Page Layout Division Algorithm](/COBOL/WeeklyNote/README.md#weekly-note-20230905)
+
+
 #### Auto Hot Key
 
   - [Browser Refresh (2022.09.03)](AutoHotKey/BrowserRefresh/README.md#browser-refresh-20220903)
