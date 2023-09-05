@@ -47,7 +47,7 @@ Business? \??
 
 #### COBOL
 
-  - [Diary Page Layout Division Algorithm](/COBOL/WeeklyNote/README.md#weekly-note-20230905)
+  - [Weekly Note (2023.09.05)](/COBOL/WeeklyNote/README.md#weekly-note-20230905)
 
 
 #### Auto Hot Key
