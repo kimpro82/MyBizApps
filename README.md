@@ -8,6 +8,7 @@ Business? \??
 
 #### Python
 
+  - [Progress Bar Practice by using `tqdm` (2023.10.05)](./Python/ProgressBar/README.md#progress-bar-practice-by-using-tqdm-20231005)
   - [Excel To Markdown 3 (2022.06.22)](Python/ExcelToMarkdown/README.md#excel-to-markdown-3-20220622)
   - [Image Blending (2022.02.27)](Python/ImageBlending/README.md#image-blending-20220227)
   - [Excel To Markdown 2 (2022.02.06)](Python/ExcelToMarkdown/README.md#excel-to-markdown-2-20220206)
