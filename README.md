@@ -6,15 +6,6 @@ Business? \??
 ## \<List>
 
 
-#### Python
-
-  - [Progress Bar Practice by using `tqdm` (2023.10.05)](./Python/ProgressBar/README.md#progress-bar-practice-by-using-tqdm-20231005)
-  - [Excel To Markdown 3 (2022.06.22)](Python/ExcelToMarkdown/README.md#excel-to-markdown-3-20220622)
-  - [Image Blending (2022.02.27)](Python/ImageBlending/README.md#image-blending-20220227)
-  - [Excel To Markdown 2 (2022.02.06)](Python/ExcelToMarkdown/README.md#excel-to-markdown-2-20220206)
-  - [Excel To Markdown 1 (2022.02.05)](Python/ExcelToMarkdown/README.md#excel-to-markdown-1-20220205)
-
-
 #### VBA
 
   - [Q&A with ChatGPT v0.3 (2023.08.14)](./VBA/QAWithChatGPT/README.md#qa-with-chatgpt-v03-20230814)
@@ -27,6 +18,15 @@ Business? \??
   - [Sigma3 (2021.07.07)](./VBA/Sigma/README.md#sigma3-20210707)
   - [Sigma2 (2021.01.03)](./VBA/Sigma/README.md#sigma2-20210103)
   - [Sigma (2021.01.02)](./VBA/Sigma/README.md#sigma-20210102)
+
+
+#### Python
+
+  - [Progress Bar Practice by using `tqdm` (2023.10.05)](./Python/ProgressBar/README.md#progress-bar-practice-by-using-tqdm-20231005)
+  - [Excel To Markdown 3 (2022.06.22)](Python/ExcelToMarkdown/README.md#excel-to-markdown-3-20220622)
+  - [Image Blending (2022.02.27)](Python/ImageBlending/README.md#image-blending-20220227)
+  - [Excel To Markdown 2 (2022.02.06)](Python/ExcelToMarkdown/README.md#excel-to-markdown-2-20220206)
+  - [Excel To Markdown 1 (2022.02.05)](Python/ExcelToMarkdown/README.md#excel-to-markdown-1-20220205)
 
 
 #### R
