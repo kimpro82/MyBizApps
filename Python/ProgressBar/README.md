@@ -71,13 +71,13 @@ How to Enhance the Value of a Program: Not Speed Improvements but Progress Bars
 
   # Create an event loop
   loop = asyncio.get_event_loop()
-
+  ```
+  ```python
   # Execute asynchronous tasks
   async def main():
       results = await process_async_data(data)
       print("Task completed")
-  ```
-  ```python
+
   if __name__ == "__main__":
       try:
           # Run the event loop until completion or KeyboardInterrupt
