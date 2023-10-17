@@ -15,7 +15,8 @@ Add a prefix to files with a specific extension in a folder
   AddPrefix.vbs <extension> <prefix> <test:1/0>
   ```
 - Future Improvements
-  - Adding a replace feature is essential, since mistakes can be critical
+  - Extend to accept wildcards as arguments, rather than just simple file extensions
+  - Add a replace feature is essential, since mistakes can be critical
 
   <details>
     <summary>Codes : AddPrefix.vbs</summary>
