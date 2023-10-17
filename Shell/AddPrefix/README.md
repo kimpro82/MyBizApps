@@ -97,7 +97,7 @@ Add a prefix to files with a specific extension in a folder
   AddPrefixToFiles folderPath, extension, prefix
   ```
   </details>
-  <details>
+  <details open="">
     <summary>Codes : AddPrefixRun.bat</summary>
 
   ```bat
