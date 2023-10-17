@@ -11,13 +11,12 @@ If WScript.Arguments.Count < 2 Then
     WScript.Quit
 End If
 
+' Decalre variables
 Dim folderPath, extension, prefix, test
-
 ' Default folder path is the current folder (modifiable)
 folderPath = "./"
 extension = WScript.Arguments(0)
 prefix = WScript.Arguments(1)
-
 ' Check if the test mode is enabled (1) or disabled (0)
 If WScript.Arguments.Count >= 3 Then
     test = WScript.Arguments(2)
