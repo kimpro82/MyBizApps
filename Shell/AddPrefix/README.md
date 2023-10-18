@@ -32,7 +32,7 @@ Add a prefix to files with a specific extension in a folder
   ' Decalre variables
   Dim folderPath, extension, prefix, test
   ' Default folder path is the current folder (modifiable)
-  folderPath = "./"
+  folderPath = ".\"
   extension = WScript.Arguments(0)
   prefix = WScript.Arguments(1)
   ' Check if the test mode is enabled (1) or disabled (0)
@@ -44,9 +44,10 @@ Add a prefix to files with a specific extension in a folder
 
   ' Test mode
   If test = 1 Then
-      WScript.Echo "extension: " & extension & vbCrLf & _
-                  "prefix   : " & prefix & vbCrLf & _
-                  "test     : " & test & vbCrLf
+      WScript.Echo "<Test>" & vbCrLf & _
+                   "extension: " & extension & vbCrLf & _
+                   "prefix   : " & prefix & vbCrLf & _
+                   "test     : " & test & vbCrLf
   End If
   ```
   ```vbs
@@ -76,18 +77,19 @@ Add a prefix to files with a specific extension in a folder
           If MatchesExtension(objFile.Path, extension) Then
               newFileName = prefix & fileName & "." & fileExtension
               objFile.Name = newFileName
-              WScript.Echo "File name changed         : " & objFile.Path & " -> " & newFileName
+              WScript.Echo "File name changed         : " & folderPath & fileName & "." & fileExtension _ 
+                                                        & " -> " & folderPath & newFileName
           Else
-              WScript.Echo "File name does not changed: " & objFile.Path
+              WScript.Echo "File name does not changed: " & folderPath & fileName & "." & fileExtension
           End If
 
           ' Test mode output
           If test = 1 Then
               WScript.Echo "<Test>" & vbCrLf & _
-                          "fileName        : " & fileName & vbCrLf & _
-                          "fileExtension   : " & fileExtension & vbCrLf & _
-                          "MatchesExtension: " & MatchesExtension(objFile.Path, extension) & vbCrLf & _
-                          "newFileName     : " & newFileName & vbCrLf
+                           "fileName        : " & fileName & vbCrLf & _
+                           "fileExtension   : " & fileExtension & vbCrLf & _
+                           "MatchesExtension: " & MatchesExtension(objFile.Path, extension) & vbCrLf & _
+                           "newFileName     : " & newFileName & vbCrLf
           End If
       Next
   End Sub
@@ -111,11 +113,12 @@ Add a prefix to files with a specific extension in a folder
   Microsoft (R) Windows Script Host 버전 5.812
   Copyright (C) Microsoft Corporation. All rights reserved.
 
-  File name does not changed: C:\……\MyBizApps\Shell\AddPrefix\AddPrefix.vbs
-  File name does not changed: C:\……\MyBizApps\Shell\AddPrefix\AddPrefixRun.bat
-  File name changed         : C:\……\MyBizApps\Shell\AddPrefix\prefix_test1.txt -> prefix_test1.txt
-  File name changed         : C:\……\MyBizApps\Shell\AddPrefix\prefix_test2.txt -> prefix_test2.txt
-  File name does not changed: C:\……\MyBizApps\Shell\AddPrefix\test3.dat
+  File name does not changed: .\AddPrefix.vbs
+  File name does not changed: .\AddPrefixRun.bat
+  File name does not changed: .\README.md
+  File name changed         : .\test1.txt -> .\prefix_test1.txt
+  File name changed         : .\test2.txt -> .\prefix_test2.txt
+  File name does not changed: .\test3.dat
   ```
   </details>
 
@@ -126,11 +129,12 @@ Add a prefix to files with a specific extension in a folder
   Microsoft (R) Windows Script Host 버전 5.812
   Copyright (C) Microsoft Corporation. All rights reserved.
 
+  <Test>
   extension: txt
   prefix   : prefix_
   test     : 1
 
-  File name does not changed: C:\……\MyBizApps\Shell\AddPrefix\AddPrefix.vbs
+  File name does not changed: .\AddPrefix.vbs
   <Test>
   fileName        : AddPrefix
   fileExtension   : vbs
@@ -139,7 +143,7 @@ Add a prefix to files with a specific extension in a folder
 
   ……
 
-  File name changed         : C:\……\MyBizApps\Shell\AddPrefix\prefix_test1.txt -> prefix_test1.txt
+  File name changed         : .\test1.txt -> .\prefix_test1.txt
   <Test>
   fileName        : test1
   fileExtension   : txt

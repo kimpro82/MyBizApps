@@ -14,7 +14,7 @@ End If
 ' Decalre variables
 Dim folderPath, extension, prefix, test
 ' Default folder path is the current folder (modifiable)
-folderPath = "./"
+folderPath = ".\"
 extension = WScript.Arguments(0)
 prefix = WScript.Arguments(1)
 ' Check if the test mode is enabled (1) or disabled (0)
@@ -26,7 +26,8 @@ End If
 
 ' Test mode
 If test = 1 Then
-    WScript.Echo "extension: " & extension & vbCrLf & _
+    WScript.Echo "<Test>" & vbCrLf & _
+                 "extension: " & extension & vbCrLf & _
                  "prefix   : " & prefix & vbCrLf & _
                  "test     : " & test & vbCrLf
 End If
@@ -56,9 +57,10 @@ Sub AddPrefixToFiles(folderPath, extension, prefix)
         If MatchesExtension(objFile.Path, extension) Then
             newFileName = prefix & fileName & "." & fileExtension
             objFile.Name = newFileName
-            WScript.Echo "File name changed         : " & objFile.Path & " -> " & newFileName
+            WScript.Echo "File name changed         : " & folderPath & fileName & "." & fileExtension _ 
+                                                      & " -> " & folderPath & newFileName
         Else
-            WScript.Echo "File name does not changed: " & objFile.Path
+            WScript.Echo "File name does not changed: " & folderPath & fileName & "." & fileExtension
         End If
 
         ' Test mode output
