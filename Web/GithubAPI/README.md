@@ -12,8 +12,8 @@ Get *Github* user information by its REST API
 
 - Fetches information about a *GitHub* user's repositories using the *GitHub API* and extracts relevant data
 - Future Improvements
-  - Get also each repositories' language stats and merge them
-  - Present the data by a *SVG* image 
+  - Also retrieve language statistics for each repository and combine them
+  - Display the data using an SVG image
 - REST API URL
   ```url
   https://api.github.com/users/{username}/repos
