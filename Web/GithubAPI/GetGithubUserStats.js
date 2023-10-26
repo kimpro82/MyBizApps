@@ -3,7 +3,7 @@
  * GitHub Repository Information Extractor
  *
  * This script fetches information about a GitHub user's repositories using the GitHub API
- * and extracts relevant data including name, privacy status, forking status, size, and language.
+ * and extracts relevant data
  *
  * @author  : kimpro82
  * @version : 0.1
