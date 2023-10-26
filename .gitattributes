@@ -1,1 +1,3 @@
+Web/GithubAPI/*.js linguist-vendored
+
 *.bas linguist-language=VBA
