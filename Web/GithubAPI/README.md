@@ -10,7 +10,7 @@ Get *Github* user information by its REST API
 
 ## [List a User's Repositories (2023.10.26)](#list)
 
-- Fetches information about a *GitHub* user's repositories using the *GitHub API* and extracts relevant data
+- Fetch information about a *GitHub* user's repositories using the *GitHub API* and extracts relevant data
 - Future Improvements
   - Also retrieve language statistics for each repository and combine them
   - Display the data using an SVG image
