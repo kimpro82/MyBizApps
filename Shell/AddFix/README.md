@@ -17,9 +17,9 @@ Add a prefix, suffix, or replace part of file names in a folder
   AddFix.vbs <substring> <prefix/suffix/replace> <text1> <text2(optional only when replace)> <test(optional)>
   ```
   ```bat
-  Example 1: cscript AddFix.vbs txt prefix pf_ test
+  Example 1: cscript AddFix.vbs .txt prefix pf_ test
   Example 2: cscript AddFix.vbs .txt suffix _sf
-  Example 3: cscript AddFix.vbs pf_ replace pf_ " " test
+  Example 3: cscript AddFix.vbs .txt replace pf_ " " test
   ```
 - Codes and Results
   <details>
@@ -130,9 +130,9 @@ Add a prefix, suffix, or replace part of file names in a folder
     <summary>Codes : AddFixRun.bat</summary>
 
   ```bat
-  cscript AddFix.vbs txt prefix pf_
+  cscript AddFix.vbs .txt prefix pf_ test
   @REM cscript AddFix.vbs .txt suffix _sf
-  cscript AddFix.vbs test replace pf_ " "
+  cscript AddFix.vbs .txt replace pf_ " " test
   ```
   </details>
   <details open="">
@@ -173,7 +173,7 @@ Add a prefix, suffix, or replace part of file names in a folder
   Copyright (C) Microsoft Corporation. All rights reserved.
 
   <Test>
-  substring: txt
+  substring: .txt
   fixType  : prefix
   text1    : pf_
   text2    :
@@ -202,7 +202,7 @@ Add a prefix, suffix, or replace part of file names in a folder
   Copyright (C) Microsoft Corporation. All rights reserved.
 
   <Test>
-  substring: test
+  substring: .txt
   fixType  : replace
   text1    : pf_
   text2    :
