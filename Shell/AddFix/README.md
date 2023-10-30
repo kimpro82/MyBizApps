@@ -1,22 +1,242 @@
-# [Add Prefix (VBScript)](../../README.md#shell)
+# [Add Fix (VBScript)](../../README.md#shell)
 
-Add a prefix to files with a specific extension in a folder
+Add a prefix, suffix, or replace part of file names in a folder
 
 
 ### \<List>
 
+- [Add Fix (2023.10.30)](#add-fix-20231030)
 - [Add Prefix (2023.10.17)](#add-prefix-20231017)
+
+
+## [Add Fix (2023.10.30)](#list)
+
+- Update : Can add a suffix or replace part of file names in a folder
+- Usage
+  ```bat
+  Usage: AddFix.vbs <substring> <prefix/suffix/replace> <text1> <text2(optional only when replace)> <test(optional)>
+  Example 1: cscript AddFix.vbs txt prefix pf_ test
+  Example 2: cscript AddFix.vbs .txt suffix _sf
+  Example 3: cscript AddFix.vbs pf_ replace pf_ " " test
+  ```
+- Codes and Results
+  <details>
+    <summary>Codes : AddFix.vbs</summary>
+
+  ```vbs
+  ' Command-line argument check
+  Dim argumentCount
+  argumentCount = WScript.Arguments.Count
+  If argumentCount < 3 Or (LCase(WScript.Arguments(1)) = "replace" And argumentCount < 4) Then
+      WScript.Echo "Usage: AddFix.vbs <substring> <prefix/suffix/replace> <text1> <text2(optional only when replace)> <test(optional)>"
+      WScript.Quit
+  End If
+  ```
+  ```vbs
+  ' Declare variables
+  Dim folderPath, substring, fixType, text1, text2, test
+  folderPath = ".\" ' Default folder path is the current folder (modifiable)
+  substring = WScript.Arguments(0)
+  fixType = LCase(WScript.Arguments(1))
+  text1 = Trim(WScript.Arguments(2))
+  ' Get text2 if "replace" mode
+  If fixType = "replace" Then
+      text2 = Trim(WScript.Arguments(3))
+  Else
+      text2 = Trim("")
+  End If
+  ' Check if test mode is enabled (True) or disabled (False)
+  If (fixType <> "replace" And argumentCount > 3) Or (fixType = "replace" And argumentCount > 4) Then
+      If LCase(WScript.Arguments(argumentCount - 1)) = "test" Then
+          test = True
+      Else
+          test = False
+      End If
+  Else
+      test = False
+  End If
+  ```
+  ```vbs
+  ' Test mode output
+  If test = True Then
+      WScript.Echo "<Test>" & vbCrLf & _
+                  "substring: " & substring & vbCrLf & _
+                  "fixType  : " & fixType & vbCrLf & _
+                  "text1    : " & text1 & vbCrLf & _
+                  "text2    : " & text2 & vbCrLf & _
+                  "test     : " & test & vbCrLf
+  End If
+  ```
+  ```vbs
+  ' Function to check if a file path has a specified substring
+  Function MatchesSubstring(fileFullName, substring)
+      If InStr(1, fileFullName, substring) > 0 Then
+          MatchesSubstring = True
+      Else
+          MatchesSubstring = False
+      End If
+  End Function
+  ```
+  ```vbs
+  ' Subroutine to add a prefix, suffix, or replace part of file names in a folder
+  Sub AddFixToFiles(folderPath, substring, fixType, text1, text2, test)
+      Dim objFSO, objFolder, objFile
+      Set objFSO = CreateObject("Scripting.FileSystemObject")
+      Set objFolder = objFSO.GetFolder(folderPath)
+
+      For Each objFile In objFolder.Files
+          Dim fileName, fileExtension, fileFullName, newFileFullName
+          fileName = objFSO.GetBaseName(objFile)
+          fileExtension = LCase(objFSO.GetExtensionName(objFile.Path))
+          fileFullName = fileName & "." & fileExtension
+          newFileFullName = ""
+
+          If fixType <> "replace" And MatchesSubstring(fileFullName, substring) Then
+              If fixType = "prefix" Then
+                  newFileFullName = text1 & fileName & "." & fileExtension
+              ElseIf fixType = "suffix" Then
+                  newFileFullName = fileName & text1 & "." & fileExtension
+              End If
+              objFile.Name = newFileFullName
+              WScript.Echo "File name changed         : " & folderPath & fileFullName & _
+                                                        " -> " & folderPath & newFileFullName
+          ElseIf fixType = "replace" And MatchesSubstring(fileFullName, substring) And MatchesSubstring(fileFullName, text1) Then
+              newFileFullName = Replace(fileFullName, text1, text2)
+              objFile.Name = newFileFullName
+              WScript.Echo "File name changed         : " & folderPath & fileFullName & _
+                                                        " -> " & folderPath & newFileFullName
+          Else
+              WScript.Echo "File name does not changed: " & folderPath & fileFullName
+          End If
+
+          ' Test mode output
+          If test = True Then
+              WScript.Echo "<Test>" & vbCrLf & _
+                          "fileName        : " & fileName & vbCrLf & _
+                          "fileExtension   : " & fileExtension & vbCrLf & _
+                          "MatchesSubstring: " & MatchesSubstring(fileFullName, substring) & vbCrLf & _
+                          "newFileFullName : " & newFileFullName & vbCrLf
+          End If
+      Next
+  End Sub
+  ```
+  ```vbs
+  AddFixToFiles folderPath, substring, fixType, text1, text2, test
+  ```
+  </details>
+  <details open="">
+    <summary>Codes : AddFixRun.bat</summary>
+
+  ```bat
+  cscript AddFix.vbs txt prefix pf_
+  @REM cscript AddFix.vbs .txt suffix _sf
+  cscript AddFix.vbs test replace pf_ " "
+  ```
+  </details>
+  <details open="">
+    <summary>Results (Normal)</summary>
+
+  ```txt
+  Microsoft (R) Windows Script Host 버전 5.812
+  Copyright (C) Microsoft Corporation. All rights reserved.
+
+  File name does not changed: .\AddFix.vbs
+  File name does not changed: .\AddFixRun.bat
+  File name does not changed: .\AddPrefix.vbs
+  File name does not changed: .\AddPrefixRun.bat
+  File name does not changed: .\README.md
+  File name changed         : .\test1.txt -> .\pf_test1.txt
+  File name changed         : .\test2.txt -> .\pf_test2.txt
+  File name does not changed: .\test3.dat
+  ```
+  ```txt
+  Microsoft (R) Windows Script Host 버전 5.812
+  Copyright (C) Microsoft Corporation. All rights reserved.
+
+  File name does not changed: .\AddFix.vbs
+  File name does not changed: .\AddFixRun.bat
+  File name does not changed: .\AddPrefix.vbs
+  File name does not changed: .\AddPrefixRun.bat
+  File name changed         : .\pf_test1.txt -> .\test1.txt
+  File name changed         : .\pf_test2.txt -> .\test2.txt
+  File name does not changed: .\README.md
+  File name does not changed: .\test3.dat
+  ```
+  </details>
+  <details>
+    <summary>Results (Test)</summary>
+
+  ```txt
+  Microsoft (R) Windows Script Host 버전 5.812
+  Copyright (C) Microsoft Corporation. All rights reserved.
+
+  <Test>
+  substring: txt
+  fixType  : prefix
+  text1    : pf_
+  text2    :
+  test     : True
+
+  File name does not changed: .\AddFix.vbs
+  <Test>
+  fileName        : AddFix
+  fileExtension   : vbs
+  MatchesSubstring: False
+  newFileFullName :
+
+  ……
+
+  File name changed         : .\test1.txt -> .\pf_test1.txt
+  <Test>
+  fileName        : test1
+  fileExtension   : txt
+  MatchesSubstring: True
+  newFileFullName : pf_test1.txt
+
+  ……
+  ```
+  ```txt
+  Microsoft (R) Windows Script Host 버전 5.812
+  Copyright (C) Microsoft Corporation. All rights reserved.
+
+  <Test>
+  substring: test
+  fixType  : replace
+  text1    : pf_
+  text2    :
+  test     : True
+
+  File name does not changed: .\AddFix.vbs
+  <Test>
+  fileName        : AddFix
+  fileExtension   : vbs
+  MatchesSubstring: False
+  newFileFullName :
+
+  ……
+
+  File name changed         : .\pf_test1.txt -> .\test1.txt
+  <Test>
+  fileName        : pf_test1
+  fileExtension   : txt
+  MatchesSubstring: True
+  newFileFullName : test1.txt
+
+  ……
+  ```
+  </details>
 
 
 ## [Add Prefix (2023.10.17)](#list)
 
+- add a prefix to files with a specific extension in a folder
 - Usage
   ```bat
   AddPrefix.vbs <extension> <prefix> <test:1/0>
   ```
 - Future Improvements
   - Extend to accept wildcards as arguments, rather than just simple file extensions
-  - Add a replace feature, since mistakes can be critical
+  - Add a replace feature, since mistakes can be critical → Done([Add Fix (2023.10.30)](#add-fix-20231030))
 - Codes and Results
   <details>
     <summary>Codes : AddPrefix.vbs</summary>
@@ -121,7 +341,6 @@ Add a prefix to files with a specific extension in a folder
   File name does not changed: .\test3.dat
   ```
   </details>
-
   <details>
     <summary>Results (Test)</summary>
 
