@@ -11,7 +11,7 @@ Add a prefix, suffix, or replace part of file names in a folder
 
 ## [Add Fix (2023.10.30)](#list)
 
-- Update : Can add a suffix or replace part of file names in a folder
+- Update : Can also add a suffix or replace part of file names in a folder
 - Usage
   ```bat
   AddFix.vbs <substring> <prefix/suffix/replace> <text1> <text2(optional only when replace)> <test(optional)>
