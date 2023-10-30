@@ -2,9 +2,9 @@
 ' Created on: 2023.10.30
 
 ' Usage: AddFix.vbs <substring> <prefix/suffix/replace> <text1> <text2(optional only when replace)> <test(optional)>
-' Example 1: cscript AddFix.vbs txt prefix pf_ test
+' Example 1: cscript AddFix.vbs .txt prefix pf_ test
 ' Example 2: cscript AddFix.vbs .txt suffix _sf
-' Example 3: cscript AddFix.vbs pf_ replace pf_ " " test
+' Example 3: cscript AddFix.vbs .txt replace pf_ " " test
 
 ' History
 ' 2023.10.17 Init.  : Added the ability to add a prefix to files with a specific extension in a folder
