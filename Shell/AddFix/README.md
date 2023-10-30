@@ -14,7 +14,9 @@ Add a prefix, suffix, or replace part of file names in a folder
 - Update : Can add a suffix or replace part of file names in a folder
 - Usage
   ```bat
-  Usage: AddFix.vbs <substring> <prefix/suffix/replace> <text1> <text2(optional only when replace)> <test(optional)>
+  AddFix.vbs <substring> <prefix/suffix/replace> <text1> <text2(optional only when replace)> <test(optional)>
+  ```
+  ```bat
   Example 1: cscript AddFix.vbs txt prefix pf_ test
   Example 2: cscript AddFix.vbs .txt suffix _sf
   Example 3: cscript AddFix.vbs pf_ replace pf_ " " test
