@@ -6,6 +6,11 @@
 ' Example 2: cscript AddFix.vbs .txt suffix _sf
 ' Example 3: cscript AddFix.vbs pf_ replace pf_ " " test
 
+' History
+' 2023.10.17 Init.  : Added the ability to add a prefix to files with a specific extension in a folder
+' 2023.10.30 Update : Extended functionality to add suffixes or replace parts of file names in a folder
+
+
 ' Command-line argument check
 Dim argumentCount
 argumentCount = WScript.Arguments.Count
