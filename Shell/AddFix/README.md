@@ -231,7 +231,7 @@ Add a prefix, suffix, or replace part of file names in a folder
 
 ## [Add Prefix (2023.10.17)](#list)
 
-- add a prefix to files with a specific extension in a folder
+- Add a prefix to files with a specific extension in a folder
 - Usage
   ```bat
   AddPrefix.vbs <extension> <prefix> <test:1/0>
