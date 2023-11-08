@@ -25,6 +25,7 @@ Add a prefix, suffix, or replace part of file names in a folder
 
       For Each objFile In objFolder.Files
           ……
+          newFileFullName = ""
 
           If fixType <> "replace" And MatchesSubstring(fileFullName, substring) Then
               If fixType = "prefix" Then
@@ -59,6 +60,7 @@ Add a prefix, suffix, or replace part of file names in a folder
 
       For Each objFile In objFolder.Files
           ……
+          newFileFullName = ""
 
           If MatchesSubstring(fileFullName, substring) Then
               If fixType = "prefix" Then
