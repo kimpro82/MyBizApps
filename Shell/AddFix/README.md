@@ -15,7 +15,7 @@ Add a prefix, suffix, or replace part of file names in a folder
 
 - Refactoring
   - Improvement of conditional branching for `prefix` `suffix` `replace` → Done
-  - Encapsulating test outputs in a function → Failed
+  - Functionalize the feature to print outputs for test → Failed
     - Because VBScript does not provide the capability to output variable names as strings
 - Codes and Results
   <details>
