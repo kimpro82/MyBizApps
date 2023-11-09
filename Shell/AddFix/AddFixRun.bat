@@ -1,6 +1,6 @@
-@REM Run AddFix.vbs
-@REM 2023.10.30
+@REM Run AddFix_b.vbs
+@REM 2023.10.30 (Adjusted : 2023.11.07)
 
-cscript AddFix.vbs .txt prefix pf_ test
-@REM cscript AddFix.vbs .txt suffix _sf
-cscript AddFix.vbs .txt replace pf_ " " test
+cscript AddFix_b.vbs .txt prefix pf_
+@REM cscript AddFix_b.vbs .txt suffix _sf
+cscript AddFix_b.vbs .txt replace pf_ " "

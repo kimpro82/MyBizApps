@@ -5,8 +5,105 @@ Add a prefix, suffix, or replace part of file names in a folder
 
 ### \<List>
 
+- [Add Fix - b (2023.11.07)](#add-fix---b-20231107)
 - [Add Fix (2023.10.30)](#add-fix-20231030)
 - [Add Prefix (2023.10.17)](#add-prefix-20231017)
+
+
+
+## [Add Fix - b (2023.11.07)](#list)
+
+- Refactoring
+  - Improvement of conditional branching for `prefix` `suffix` `replace` → Done
+  - Functionalize the feature to print outputs for test → Failed
+    - Because VBScript does not provide the capability to output variable names as strings
+- Codes and Results
+  <details>
+    <summary>Codes : AddFix.vbs (Before)</summary>
+
+  ```vbs
+  ' Subroutine to add a prefix, suffix, or replace part of file names in a folder
+  Sub AddFixToFiles(folderPath, substring, fixType, text1, text2, test)
+      ……
+
+      For Each objFile In objFolder.Files
+          ……
+          newFileFullName = ""
+
+          If fixType <> "replace" And MatchesSubstring(fileFullName, substring) Then
+              If fixType = "prefix" Then
+                  newFileFullName = text1 & fileName & "." & fileExtension
+              ElseIf fixType = "suffix" Then
+                  newFileFullName = fileName & text1 & "." & fileExtension
+              End If
+              objFile.Name = newFileFullName
+              WScript.Echo "File name changed         : " & folderPath & fileFullName & _
+                                                        " -> " & folderPath & newFileFullName
+          ElseIf fixType = "replace" And MatchesSubstring(fileFullName, substring) And MatchesSubstring(fileFullName, text1) Then
+              newFileFullName = Replace(fileFullName, text1, text2)
+              objFile.Name = newFileFullName
+              WScript.Echo "File name changed         : " & folderPath & fileFullName & _
+                                                        " -> " & folderPath & newFileFullName
+          Else
+              WScript.Echo "File name does not changed: " & folderPath & fileFullName
+          End If
+
+          ……
+      Next
+  End Sub
+  ```
+  </details>
+  <details>
+    <summary>Codes : AddFix_b.vbs (After)</summary>
+
+  ```vbs
+  ' Subroutine to add a prefix, suffix, or replace part of file names in a folder
+  Sub AddFixToFiles(folderPath, substring, fixType, text1, text2, test)
+      ……
+
+      For Each objFile In objFolder.Files
+          ……
+          newFileFullName = ""
+
+          If MatchesSubstring(fileFullName, substring) Then
+              If fixType = "prefix" Then
+                  newFileFullName = text1 & fileName & "." & fileExtension
+              ElseIf fixType = "suffix" Then
+                  newFileFullName = fileName & text1 & "." & fileExtension
+              ElseIf fixType = "replace" And MatchesSubstring(fileFullName, text1) Then
+                  newFileFullName = Replace(fileFullName, text1, text2)
+              End If
+
+              If newFileFullName <> "" Then
+                  objFile.Name = newFileFullName
+                  WScript.Echo "File name changed         : " & folderPath & fileFullName & _
+                                                            " -> " & folderPath & newFileFullName
+              Else
+                  WScript.Echo "File name does not changed: " & folderPath & fileFullName
+              End If
+          ' Else
+                  ' WScript.Echo "File name does not changed: " & folderPath & fileFullName
+          End If
+
+          ……
+      Next
+  End Sub
+  ```
+  </details>
+  <details open="">
+    <summary>Results</summary>
+
+  - Excluded files that were not the target of changes from the output results.
+    - Refactoring and changes in the execution results are typically meant to be separate tasks, but I just did it. Who cares?
+  ```txt
+  File name changed         : .\test1.txt -> .\pf_test1.txt
+  File name changed         : .\test2.txt -> .\pf_test2.txt
+  ```
+  ```txt
+  File name changed         : .\pf_test1.txt -> .\test1.txt
+  File name changed         : .\pf_test2.txt -> .\test2.txt
+  ```
+  </details>
 
 
 ## [Add Fix (2023.10.30)](#list)
