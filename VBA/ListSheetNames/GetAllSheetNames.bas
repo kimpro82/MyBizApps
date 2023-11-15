@@ -1,9 +1,6 @@
 ' Get All Sheet Names in the Excel Workbook
-' : Retrieves sheet names and prints them in a column
+' : Retrieves all sheet names in the active workbook and prints them in a column
 ' 2023.11.15
-'
-' This subroutine iterates through each worksheet in the active workbook,
-' retrieves its name, and outputs the names in a column.
 
 
 Option Explicit
@@ -22,10 +19,46 @@ Private Sub GetAllSheetNames()
     For Each ws In ThisWorkbook.Sheets
         i = i + 1
         sheetNames(i) = ws.Name
-        ' Debug.Print sheetNames(i)                         ' Ok
+        ' Debug.Print sheetNames(i)                         ' For debugging purposes
     Next ws
 
     ' Output sheet names in a column in the active sheet without a loop
     Range("A1").Resize(UBound(sheetNames), 1).Value = Application.Transpose(sheetNames)
+
+End Sub
+
+
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+
+    Dim wsName As String
+
+    ' Get the value of the selected cell
+    wsName = Target.Value
+
+    ' If a sheet with the given name exists, activate it
+    If WorksheetExists(wsName) Then
+        Sheets(wsName).Activate
+    End If
+
+End Sub
+
+
+Function WorksheetExists(wsName As String) As Boolean
+
+    ' Check if a sheet with the given name exists
+    On Error Resume Next
+        WorksheetExists = Not Sheets(wsName) Is Nothing
+    On Error GoTo 0
+
+End Function
+
+
+Private Sub btn_GetAllSheetNames_Click()
+
+    ' Clear data in column A
+    Columns("A:A").Clear
+
+    ' Execute the GetAllSheetNames function
+    GetAllSheetNames
 
 End Sub
