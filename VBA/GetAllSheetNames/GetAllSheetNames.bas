@@ -5,7 +5,9 @@
 ' This subroutine iterates through each worksheet in the active workbook,
 ' retrieves its name, and outputs the names in a column.
 
+
 Option Explicit
+
 
 Private Sub GetAllSheetNames()
 
