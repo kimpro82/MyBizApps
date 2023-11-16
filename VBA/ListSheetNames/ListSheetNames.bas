@@ -60,7 +60,7 @@ Private Sub btn_GetAllSheetNames_Click()
     ' Clear data in column A
     Columns("A:A").Clear
 
-    ' Execute the GetAllSheetNames function
+    ' Execute the GetAllSheetNames() procedure
     Call GetAllSheetNames
 
 End Sub
