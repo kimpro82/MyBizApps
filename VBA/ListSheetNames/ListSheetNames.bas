@@ -1,4 +1,4 @@
-' Get All Sheet Names in the Excel Workbook
+' List All Sheet Names in the Excel Workbook
 ' 2023.11.15
 '
 ' - Retrieves all sheet names in the active workbook and prints them in a column
