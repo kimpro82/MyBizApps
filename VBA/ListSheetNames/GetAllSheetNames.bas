@@ -1,6 +1,8 @@
 ' Get All Sheet Names in the Excel Workbook
-' : Retrieves all sheet names in the active workbook and prints them in a column
 ' 2023.11.15
+'
+' - Retrieves all sheet names in the active workbook and prints them in a column
+' - Can activate a specific sheet when click
 
 
 Option Explicit
@@ -30,14 +32,14 @@ End Sub
 
 Private Sub Worksheet_SelectionChange(ByVal Target As Range)
 
-    Dim wsName As String
+    If Target.Cells.CountLarge = 1 Then ' Checking if only a single cell is selected
+        Dim wsName As String
+        wsName = Target.Value ' Store the value of the selected cell
 
-    ' Get the value of the selected cell
-    wsName = Target.Value
-
-    ' If a sheet with the given name exists, activate it
-    If WorksheetExists(wsName) Then
-        Sheets(wsName).Activate
+        ' If a sheet with the given name exists, activate it
+        If WorksheetExists(wsName) Then
+            Sheets(wsName).Activate
+        End If
     End If
 
 End Sub
