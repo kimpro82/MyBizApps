@@ -61,6 +61,6 @@ Private Sub btn_GetAllSheetNames_Click()
     Columns("A:A").Clear
 
     ' Execute the GetAllSheetNames function
-    GetAllSheetNames
+    Call GetAllSheetNames
 
 End Sub
