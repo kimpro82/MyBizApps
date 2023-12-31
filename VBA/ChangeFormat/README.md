@@ -91,7 +91,7 @@ Excel with VBA is Fish with Water!
   ```vba
   Sub Cameleon()
 
-      Dim rnd1, rnd2, rnd3 As Integer
+      Dim rnd1 As Integer, rnd2 As Integer, rnd3 As Integer
       Randomize
       rnd1 = Rnd * 255
 
