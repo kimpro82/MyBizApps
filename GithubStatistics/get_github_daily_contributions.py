@@ -2,6 +2,13 @@
 Crawling Daily Contribution Data from Github
 2023.12.31
 
+This script aims to retrieve the daily contribution data from a Github profile.
+It collects information about the number of contributions made each day within a specified year.
+
+Usage:
+1. search_used_item_all function scrapes the daily contribution data for a given GitHub user and year.
+2. save_csv function saves the collected data as a CSV file.
+
 """
 
 
@@ -15,9 +22,16 @@ import pandas as pd
 TEST = True
 
 
-def search_used_item_all(_id:str, _year:int = 0):
+def retrieve_daily_contributions(_id:str, _year:int = 0) -> pd.DataFrame:
     """
+    Retrieve daily contribution data from a GitHub profile for a specific year.
 
+    Args:
+        _id (str): GitHub username or ID
+        _year (int): Year for which contributions are to be retrieved (default: 0 for the current year)
+
+    Returns:
+        DataFrame: DataFrame containing the daily contribution data
     """
 
     # URL 설정
@@ -79,9 +93,9 @@ def search_used_item_all(_id:str, _year:int = 0):
 
                 _daily_contributions_data.append(_one_td_data)
 
-    except Exception as e:
-        print("검색 결과를 가져오지 못 했습니다:", e)
-        _daily_contributions_data.append("Failed")
+    except requests.RequestException as e:
+        print(f"Failed to retrieve data: {e}")
+        _daily_contributions_data.append(["Failed", "Failed", "Failed"])
 
     _columns = ["data-date", "tool-tip", "validation"]
     _df = pd.DataFrame(data = _daily_contributions_data, columns = _columns)
@@ -91,7 +105,11 @@ def search_used_item_all(_id:str, _year:int = 0):
 
 def save_csv(_data_frame, _filename="github_daily_contributions"):
     """
+    Save DataFrame as a CSV file.
 
+    Args:
+        _data_frame (DataFrame): DataFrame to be saved
+        _filename (str): Name of the output file (default: github_daily_contributions)
     """
 
     _seoul_timezone = pytz.timezone('Asia/Seoul')
@@ -103,7 +121,7 @@ def save_csv(_data_frame, _filename="github_daily_contributions"):
 
 if __name__ == "__main__":
 
-    df = search_used_item_all(_id = "kimpro82", _year = 2023)
+    df = retrieve_daily_contributions(_id = "kimpro82", _year = 2023)
     print(df)
 
     save_csv(df)
