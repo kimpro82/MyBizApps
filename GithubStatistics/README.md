@@ -7,6 +7,8 @@ Manufacture *Github* user statistics by its REST API and crawling
 
 - [Python : Get Daily Contribution Data by Crawling (2023.12.31)](#python--get-daily-contribution-data-by-crawling-20231231)
 - [TypeScript : List a User's Repositories (2023.10.26)](#typescript--list-a-users-repositories-20231026)
+- [Google Sheet : Most Used Languages (2023.10.25)](#google-sheet--most-used-languages-20231025)
+- [Google Sheet : Dashboard Outline (2020.04.19)](#google-sheet--dashboard-outline-20200419)
 
 
 ## [Python : Get Daily Contribution Data by Crawling (2023.12.31)](#list)
@@ -258,3 +260,26 @@ Manufacture *Github* user statistics by its REST API and crawling
   └─────────┴───────────────────────┴───────────┴───────┴───────┴────────────────────┘
   ```
   </details>
+
+
+## [Google Sheet : Most Used Languages (2023.10.25)](#list)
+
+- Manually produce statistics of an user's most used languages in Github
+  ☞ [Link on Google Sheet](https://docs.google.com/spreadsheets/d/11xVkJTgdPQGpMBumih58aiuZ62kejE_EZHUKJ8sLGWw/edit?usp=sharing)
+- Future Improvement
+  - Update automatically with Github REST API
+    ```url
+    https://api.github.com/repos/{username}/{repo}/languages
+    ```
+
+  ![Most Used Languages](./Images/Github_Most_Used_Languages.png)
+
+
+## [Google Sheet : Dashboard Outline (2020.04.19)](#list)
+
+- A blueprint for a dashboard to manage Github contributions using Github API  
+  ☞ [Link on Google Sheet](https://docs.google.com/spreadsheets/d/1sAs7gI6XTFCzPPCxwryew0eV-0sE_hHjab5yzo3t3Mw/edit?usp=sharing)
+- Future Improvement
+  - ~~Update automatically with Github REST API~~ (Enough to operate manually)
+
+  ![Github Contribution Goal](./Images/Github_Contribution_Goal.png)
