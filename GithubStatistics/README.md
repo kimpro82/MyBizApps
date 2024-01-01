@@ -24,8 +24,10 @@ Manufacture *Github* user statistics by its REST API and crawling
   ```
 - Usage
   ```py
-  USERNAME = "{username}"
-  contributions_data = retrieve_daily_contributions(username=USERNAME, year={year})
+  if __name__ == "__main__":
+      USERNAME = "{username}"
+      contributions_data = retrieve_daily_contributions(username=USERNAME, year={year})
+      ……
   ```
 - Codes and Results
   <details>
@@ -264,7 +266,7 @@ Manufacture *Github* user statistics by its REST API and crawling
 
 ## [Google Sheet : Most Used Languages (2023.10.25)](#list)
 
-- Manually produce statistics of an user's most used languages in Github
+- Manually produce statistics of an user's most used languages in Github  
   ☞ [Link on Google Sheet](https://docs.google.com/spreadsheets/d/11xVkJTgdPQGpMBumih58aiuZ62kejE_EZHUKJ8sLGWw/edit?usp=sharing)
 - Future Improvement
   - Update automatically with Github REST API
@@ -277,7 +279,7 @@ Manufacture *Github* user statistics by its REST API and crawling
 
 ## [Google Sheet : Dashboard Outline (2020.04.19)](#list)
 
-- A blueprint for a dashboard to manage Github contributions using Github API  
+- ~~A blueprint for~~ a dashboard to manage Github contributions using Github API  
   ☞ [Link on Google Sheet](https://docs.google.com/spreadsheets/d/1sAs7gI6XTFCzPPCxwryew0eV-0sE_hHjab5yzo3t3Mw/edit?usp=sharing)
 - Future Improvement
   - ~~Update automatically with Github REST API~~ (Enough to operate manually)
