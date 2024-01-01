@@ -76,6 +76,7 @@ def retrieve_daily_contributions(username: str, year: int = 0) -> pd.DataFrame:
 
     columns = ["Date", "Contributions", "Validation"]
     df = pd.DataFrame(data=daily_contributions, columns=columns)
+
     return df
 
 
@@ -99,4 +100,5 @@ if __name__ == "__main__":
     USERNAME = "kimpro82"
     contributions_data = retrieve_daily_contributions(username=USERNAME, year=2023)
     print(contributions_data)
+
     save_csv(contributions_data)
