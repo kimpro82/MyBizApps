@@ -18,6 +18,8 @@
 
   - [Python : Get Daily Contribution Data by Crawling (2023.12.31)](/GithubStatistics/README.md#python--get-daily-contribution-data-by-crawling-20231231)
   - [TypeScript : List a User's Repositories (2023.10.26)](/GithubStatistics/README.md#typescript--list-a-users-repositories-20231026)
+  - [Google Sheet : Most Used Languages (2023.10.25)](/GithubStatistics/README.md#google-sheet--most-used-languages-20231025)
+  - [Google Sheet : Dashboard Outline (2020.04.19)](/GithubStatistics/README.md#google-sheet--dashboard-outline-20200419)
 
 
 ## [VBA](#list)
