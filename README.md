@@ -24,6 +24,7 @@
 
 ## [VBA](#list)
 
+  - [Empty Cells (2024.02.09)](/VBA/EmptyCells/README.md#empty-cells-20240209)
   - [List Sheet Names (2023.11.15)](/VBA/ListSheetNames/README.md#list-sheet-names-20231115)
   - [Q&A with ChatGPT v0.3 (2023.08.14)](/VBA/QAWithChatGPT/README.md#qa-with-chatgpt-v03-20230814)
   - [Load CSV (2023.08.04)](/VBA/LoadCSV/README.md#load-csv-20230804)
