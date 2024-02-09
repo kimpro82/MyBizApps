@@ -40,6 +40,7 @@
     </details>
 
   - Future Improvements
+    - Gather the calculation results into an array and write them on the sheet at once
     - Translate additional parts relying on Excel functions into VBA code
 
   - Codes
