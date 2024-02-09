@@ -29,7 +29,7 @@
 
       ![Empty Cells (Before 1)](./Images/EmptyCells_Before_1.png)
 
-      `C9` : `=SUM(D9:J9)+C8  `
+      `C9` : `=SUM(D9:J9)+C8`
 
       ![Empty Cells (Before 2)](./Images/EmptyCells_Before_2.png)
     </details>
