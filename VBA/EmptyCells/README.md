@@ -1,14 +1,14 @@
-# [Empty Cells (Excel VBA)](../../README.md#vba)
+# [Progress Rate Tracker (Excel VBA)](../../README.md#vba)
 
   I want a prettier chart
 
 
 ### \<List>
 
-  - [Empty Cells (2024.02.09)](#empty-cells-20240209)
+  - [Progress Rate Tracker (2024.02.09)](#progress-rate-tracker-20240209)
 
 
-## [Empty Cells (2024.02.09)](#list)
+## [Progress Rate Tracker (2024.02.09)](#list)
 
   - Features
     - Prevent `""` returned from excel formula from being regarded as `0` in the chart
@@ -27,19 +27,20 @@
 
       `C9` : `=IF(TODAY()>=A9,SUM(D9:J9)+C8,"")`
 
-      ![Empty Cells (Before 1)](./Images/EmptyCells_Before_1.png)
+      ![Progress Rate Tracker (Before 1)](./Images/EmptyCells_Before_1.png)
 
       `C9` : `=SUM(D9:J9)+C8`
 
-      ![Empty Cells (Before 2)](./Images/EmptyCells_Before_2.png)
+      ![Progress Rate Tracker (Before 2)](./Images/EmptyCells_Before_2.png)
     </details>
     <details open="">
       <summary>After</summary>
 
-      ![Empty Cells (After)](./Images/EmptyCells_After.png)
+      ![Progress Rate Tracker (After)](./Images/EmptyCells_After.png)
     </details>
 
   - Future Improvements
+    - Automatically update upon data input without a button click
     - Gather the calculation results into an array and write them on the sheet at once
     - Translate additional parts relying on Excel functions into VBA code
 
