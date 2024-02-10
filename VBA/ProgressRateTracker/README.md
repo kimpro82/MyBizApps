@@ -27,16 +27,16 @@
 
       `C9` : `=IF(TODAY()>=A9,SUM(D9:J9)+C8,"")`
 
-      ![Progress Rate Tracker (Before 1)](./Images/EmptyCells_Before_1.png)
+      ![Progress Rate Tracker (Before 1)](./Images/ProgressRateTracker_Before_1.png)
 
       `C9` : `=SUM(D9:J9)+C8`
 
-      ![Progress Rate Tracker (Before 2)](./Images/EmptyCells_Before_2.png)
+      ![Progress Rate Tracker (Before 2)](./Images/ProgressRateTracker_Before_2.png)
     </details>
     <details open="">
       <summary>After</summary>
 
-      ![Progress Rate Tracker (After)](./Images/EmptyCells_After.png)
+      ![Progress Rate Tracker (After)](./Images/ProgressRateTracker_After.png)
     </details>
 
   - Future Improvements
@@ -46,7 +46,7 @@
 
   - Codes
     <details>
-      <summary>Codes : EmptyCells.bas</summary>
+      <summary>Codes : ProgressRateTracker.bas</summary>
 
     ```vba
     Option Explicit
