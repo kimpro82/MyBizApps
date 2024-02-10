@@ -11,6 +11,7 @@
 ## [Progress Rate Tracker (2024.02.09)](#list)
 
   - Features
+    - Manage progress rate using a combination of Excel functions and VBA
     - Prevent `""` returned from excel formula from being regarded as `0` in the chart
     - ★ The cleanest handling of **magic literals** in my VBA coding history! ★
       ```vba
