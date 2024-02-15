@@ -1,8 +1,9 @@
 # Lottery Number Generator
 # 2024.02.15
 
-# This script generates Lotto numbers by randomly selecting 6 unique numbers 
-# between 1 and 45. It repeats the process 20 times and prints the selected numbers.
+# This script generates numbers for Korean Lotto 6/45 
+# by randomly selecting 6 unique numbers between 1 and 45.
+# It repeats the process 20 times and prints the selected numbers.
 
 BALLS = 45
 CHOOSE = 6
