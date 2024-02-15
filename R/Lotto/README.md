@@ -11,7 +11,7 @@ COBOL never dies
 ## [Lottery Number Generator (2024.02.15)](#list)
 
 - Features
-  - Generate Lottery numbers for Korean Lotto 6/45 by randomly selecting 6 unique numbers between 1 and 45
+  - Generate Lottery numbers for *Korean Lotto 6/45* by randomly selecting 6 unique numbers between 1 and 45
   - Suggest additionally a fortune number
   - Sort the outputs as ascending order and display them vertically
 - Don't worry, I understand enough that Lottery numbers are highly random
