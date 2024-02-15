@@ -32,6 +32,7 @@ COBOL never dies
           # Generate 6 random numbers between 1 and 42
           nums <- c(sort(ceiling(runif(CHOOSE) * BALLS)))
           luckyNum <- ceiling(runif(1) * BALLS)
+
           # Check if there are exactly 6 unique numbers and luckyNum is not in nums
           if (!any(duplicated(nums)) && !any(luckyNum %in% nums)) {
               break;
