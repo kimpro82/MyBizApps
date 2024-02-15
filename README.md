@@ -59,6 +59,7 @@
 
 ## [R](#list)
 
+  - [Lottery Number Generator (2024.02.15)](/R/Lotto/README.md#lottery-number-generator-20240215)
   - [Reach The Goal 1 (2022.10.31)](/R/ReachTheGoal/README.md#reach-the-goal-1-20221031)
   - [Reach The Goal 0 (2022.10.31)](/R/ReachTheGoal/README.md#reach-the-goal-0-20221031)
   - [Sample Number 2 (2020.06.16)](R/SampleNumber#sample-number-2-2020616)
