@@ -24,6 +24,7 @@
 
 ## [VBA](#list)
 
+  - [Array Assignment (2024.02.26)](/VBA/ArrayAssign/README.md#array-assignment-20240226)
   - [Progress Rate Tracker (2024.02.09)](/VBA/ProgressRateTracker/README.md#progress-rate-tracker-20240209)
   - [List Sheet Names (2023.11.15)](/VBA/ListSheetNames/README.md#list-sheet-names-20231115)
   - [Q&A with ChatGPT v0.3 (2023.08.14)](/VBA/QAWithChatGPT/README.md#qa-with-chatgpt-v03-20230814)
