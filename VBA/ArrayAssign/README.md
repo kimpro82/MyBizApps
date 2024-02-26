@@ -65,7 +65,7 @@ Improve the Syntax for Array Assignment
     ```
     </details>
     <details open="">
-        <summary>Result</summary>
+      <summary>Result</summary>
 
     ```vba
     arr = AssignArray("{1, 2, 3, 4}")
