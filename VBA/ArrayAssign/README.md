@@ -10,7 +10,7 @@ Improve the Syntax for Array Assignment
 
 ## [Array Assignment (2024.02.26)](#list)
 
-- Feature
+- Features
   - Can enter an array in one line by enclosing it in `{}` like in other languages
   - Only one-dimensional arrays are supported
 - Future Improvement
