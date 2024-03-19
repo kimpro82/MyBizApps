@@ -18,7 +18,7 @@ Manufacture *Github* user statistics by its REST API and crawling
 - Implement in 4 scripting languages: Bash, Batchfile, VBScript, PowerShell
 - Future Improvements
   - Calculate the summation
-  - Sort by the Total Size
+  - Sort by the total size
 - Code and Results
   - `CalcTotalSizeByExtension.sh`
     <details>
