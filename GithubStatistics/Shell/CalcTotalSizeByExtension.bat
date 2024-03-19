@@ -1,4 +1,4 @@
-:: Calculate the Total Number and Size of Files by Extension in All Subfolders
+:: Calculate the Total Number and Size of Files by Extension in All Subdirectories
 :: 2024.03.19
 
 
@@ -11,7 +11,7 @@ set "search_dir=%~dp0"
 :: Temporary file
 set "temp_file=%TEMP%\temp.txt"
 
-:: Get list of files and their sizes in subfolders only
+:: Get list of files and their sizes in subdirectories only
 for /r "%search_dir%" %%F in (*) do (
     if not "%%~dpF"=="%search_dir%" (
         echo %%~zF %%~xF >> "%temp_file%"

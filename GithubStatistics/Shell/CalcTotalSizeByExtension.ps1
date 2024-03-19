@@ -1,4 +1,4 @@
-# Calculate the Total Number and Size of Files by Extension in All Subfolders
+# Calculate the Total Number and Size of Files by Extension in All Subdirectories
 # 2024.03.19
 
 Get-ChildItem -Path . -Recurse -File | Where-Object { $_.DirectoryName -ne (Get-Location).Path } | Group-Object Extension | 

@@ -16,7 +16,7 @@
 
 ## [※ Github Statistics](#list)
 
-  - [Shell : Calculate the Total Number and Size of Files by Extension in All Subfolders (2024.03.19)](/GithubStatistics/README.md#shell--calculate-the-total-number-and-size-of-files-by-extension-in-all-subfolders-20240319)
+  - [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories (2024.03.19)](/GithubStatistics/README.md#shell--calculate-the-total-number-and-size-of-files-by-extension-in-all-subdirectories-20240319)
   - [Python : Get Daily Contribution Data by Crawling (2023.12.31)](/GithubStatistics/README.md#python--get-daily-contribution-data-by-crawling-20231231)
   - [TypeScript : List a User's Repositories (2023.10.26)](/GithubStatistics/README.md#typescript--list-a-users-repositories-20231026)
   - [Google Sheet : Most Used Languages (2023.10.25)](/GithubStatistics/README.md#google-sheet--most-used-languages-20231025)

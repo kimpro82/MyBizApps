@@ -5,7 +5,7 @@ Manufacture *Github* user statistics by its REST API and crawling
 
 ### \<List>
 
-- [Shell : Calculate the Total Number and Size of Files by Extension in All Subfolders (2024.03.19)](#shell--calculate-the-total-number-and-size-of-files-by-extension-in-all-subfolders-20240319)
+- [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories (2024.03.19)](#shell--calculate-the-total-number-and-size-of-files-by-extension-in-all-subdirectories-20240319)
 - [Python : Get Daily Contribution Data by Crawling (2023.12.31)](#python--get-daily-contribution-data-by-crawling-20231231)
 - [TypeScript : List a User's Repositories (2023.10.26)](#typescript--list-a-users-repositories-20231026)
 - [Google Sheet : Most Used Languages (2023.10.25)](#google-sheet--most-used-languages-20231025)
@@ -13,7 +13,7 @@ Manufacture *Github* user statistics by its REST API and crawling
 
 
 
-## [Shell : Calculate the Total Number and Size of Files by Extension in All Subfolders (2024.03.19)](#list)
+## [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories (2024.03.19)](#list)
 
 - Implement in 4 scripting languages: Bash, Batchfile, VBScript, PowerShell
 - Future Improvements
@@ -54,7 +54,7 @@ Manufacture *Github* user statistics by its REST API and crawling
     :: Temporary file
     set "temp_file=%TEMP%\temp.txt"
 
-    :: Get list of files and their sizes in subfolders only
+    :: Get list of files and their sizes in subdirectories only
     for /r "%search_dir%" %%F in (*) do (
         if not "%%~dpF"=="%search_dir%" (
             echo %%~zF %%~xF >> "%temp_file%"
