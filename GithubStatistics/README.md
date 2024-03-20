@@ -1,14 +1,189 @@
-# [Github Statistics](/README.md#※-github-statistics)
+# [Github Statistics](/README.md#-github-statistics)
 
 Manufacture *Github* user statistics by its REST API and crawling
 
 
 ### \<List>
 
+- [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories (2024.03.19)](#shell--calculate-the-total-number-and-size-of-files-by-extension-in-all-subdirectories-20240319)
 - [Python : Get Daily Contribution Data by Crawling (2023.12.31)](#python--get-daily-contribution-data-by-crawling-20231231)
 - [TypeScript : List a User's Repositories (2023.10.26)](#typescript--list-a-users-repositories-20231026)
 - [Google Sheet : Most Used Languages (2023.10.25)](#google-sheet--most-used-languages-20231025)
 - [Google Sheet : Dashboard Outline (2020.04.19)](#google-sheet--dashboard-outline-20200419)
+
+
+
+## [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories (2024.03.19)](#list)
+
+- Implement in 4 scripting languages: Bash, Batchfile, VBScript, PowerShell
+- Future Improvements
+  - Calculate the summation
+  - Sort by the total size
+- Code and Results
+  - `CalcTotalSizeByExtension.sh`
+    <details>
+      <summary>Code</summary>
+
+    ```sh
+    find */ -type f | awk -F'.' '{print $NF}' | sort | uniq -c | while read count ext; do 
+      size=$(find */ -type f -name "*.$ext" -exec du -b {} + | awk '{total+=$1} END {print total}')
+      echo "$ext $count $size"
+    done
+    ```
+    </details>
+    <details open="">
+      <summary>Console Output</summary>
+
+      ```sh
+      ini 1 345
+      json 1 102
+      txt 2 88
+      ```
+    </details>
+  - `CalcTotalSizeByExtension.bat`
+    <details>
+      <summary>Code</summary>
+
+    ```bat
+    @echo off
+    setlocal enabledelayedexpansion
+
+    :: Set the directory to search
+    set "search_dir=%~dp0"
+
+    :: Temporary file
+    set "temp_file=%TEMP%\temp.txt"
+
+    :: Get list of files and their sizes in subdirectories only
+    for /r "%search_dir%" %%F in (*) do (
+        if not "%%~dpF"=="%search_dir%" (
+            echo %%~zF %%~xF >> "%temp_file%"
+        )
+    )
+
+    :: Initialize the last extension variable
+    set "lastext="
+
+    :: Process each file extension
+    for /f "tokens=1,* delims= " %%A in ('type "%temp_file%" ^| sort /+41') do (
+        set "size=%%A"
+        set "ext=%%B"
+        set "count=1"
+        if not "!lastext!"=="!ext!" (
+            if not "!lastext!"=="" (
+                :: Remove the leading dot from the extension
+                set "lastext=!lastext:~1!"
+                echo !lastext! !count! !totalsize!
+            )
+            set "totalsize=0"
+            set "count=0"
+            set "lastext=!ext!"
+        )
+        set /a totalsize+=size
+        set /a count+=1
+    )
+
+    :: Write the last extension
+    if not "!lastext!"=="" (
+        :: Remove the leading dot from the extension
+        set "lastext=!lastext:~1!"
+        echo !lastext! !count! !totalsize!
+    )
+
+    :: Clean up
+    if exist "%temp_file%" del "%temp_file%"
+
+    endlocal
+    ```
+    </details>
+    <details open="">
+      <summary>Console Output</summary>
+
+      ```bat
+      json  1 102
+      ini  1 345
+      txt  2 88
+      ```
+    </details>
+  - `CalcTotalSizeByExtension.vbs`
+    <details>
+      <summary>Code</summary>
+
+    ```vbs
+    Set dict = CreateObject("Scripting.Dictionary")
+
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Set folder = fso.GetFolder(".")
+    Set subFolders = CreateObject("Scripting.Dictionary")
+
+    ' Skip the current folder by starting with its subfolders
+    For Each subfolder in folder.SubFolders
+        subFolders.Add subfolder.Path, subfolder
+    Next
+
+    Do While subFolders.Count > 0
+        Set folder = subFolders.Item(subFolders.Keys()(0))
+        subFolders.Remove folder.Path
+        For Each subfolder in folder.SubFolders
+            subFolders.Add subfolder.Path, subfolder
+        Next
+        For Each file In folder.Files
+            ext = fso.GetExtensionName(file)
+            If Not dict.Exists(ext) Then
+                dict.Add ext, Array(0,0)
+            End If
+            fileInfo = dict(ext)
+            fileInfo(0) = fileInfo(0) + 1
+            fileInfo(1) = fileInfo(1) + file.Size
+            dict(ext) = fileInfo
+        Next
+    Loop
+
+    ' Output results to the console
+    For Each ext In dict.Keys
+        WScript.StdOut.WriteLine ext & " " & dict(ext)(0) & " " & dict(ext)(1)
+    Next
+    ```
+    </details>
+    <details open="">
+      <summary>Run & Console Output</summary>
+
+      ```vbs
+      cscript CalcTotalSizeByExtension.vbs
+      ```
+      ```vbs
+      Microsoft (R) Windows Script Host 버전 5.812
+      Copyright (C) Microsoft Corporation. All rights reserved.
+
+      json 1 102
+      ini 1 345
+      txt 2 88
+      ```
+    </details>
+  - `CalcTotalSizeByExtension.ps1`
+    <details>
+      <summary>Code</summary>
+
+    ```ps1
+    Get-ChildItem -Path . -Recurse -File | Where-Object { $_.DirectoryName -ne (Get-Location).Path } | Group-Object Extension | 
+    Select-Object @{Name='Extension';Expression={$_.Name -replace '^\.', ''}}, 
+                  @{Name='FileCount';Expression={$_.Count}}, 
+                  @{Name='TotalSize (Bytes)';Expression={$_.Group | Measure-Object -Property Length -Sum | Select-Object -ExpandProperty Sum}} | 
+    Sort-Object 'TotalSize (Bytes)' -Descending | 
+    Format-Table -AutoSize
+    ```
+    </details>
+    <details open="">
+      <summary>Console Output</summary>
+
+      ```ps1
+      Extension FileCount TotalSize (Bytes)
+      --------- --------- -----------------
+      ini               1               345
+      json              1               102
+      txt               2                88
+      ```
+    </details>
 
 
 ## [Python : Get Daily Contribution Data by Crawling (2023.12.31)](#list)
@@ -29,7 +204,7 @@ Manufacture *Github* user statistics by its REST API and crawling
       contributions_data = retrieve_daily_contributions(username=USERNAME, year={year})
       ……
   ```
-- Codes and Results
+- Code and Results
   <details>
     <summary>get_github_daily_contributions.py</summary>
 
@@ -165,7 +340,7 @@ Manufacture *Github* user statistics by its REST API and crawling
   ```bash
   node GetGithubUserStats.js {username}
   ```
-- Codes and Results
+- Code and Results
   <details>
     <summary>GetGithubUserStats.ts</summary>
 
