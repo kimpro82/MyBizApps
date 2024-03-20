@@ -1,4 +1,4 @@
-# [Github Statistics](/README.md#※-github-statistics)
+# [Github Statistics](/README.md#-github-statistics)
 
 Manufacture *Github* user statistics by its REST API and crawling
 
