@@ -5,7 +5,7 @@
 
 ### \<List>
 
-- [※ Github Statistics](#※-github-statistics)
+- [※ Github Statistics](#-github-statistics)
 - [VBA](#vba)
 - [Python](#python)
 - [Shell](#shell)
