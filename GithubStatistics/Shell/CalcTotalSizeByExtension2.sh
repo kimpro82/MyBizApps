@@ -21,8 +21,8 @@ total_count=0
 total_size=0
 
 # Print the header with left-aligned extension names and right-aligned numbers
-printf "%-10s %10s %10s\n" "Extension" "Count" "Size"
-printf '=%.0s' {1..32}
+printf "%-9s %10s %17s\n" "Extension" "FileCount" "TotalSize(Bytes)"
+printf '=%.0s' {1..38}
 echo ""
 
 # Use process substitution to sort the output
@@ -34,11 +34,11 @@ while read -r line; do
 done < <(for ext in "${!file_counts[@]}"; do
     count=${file_counts[$ext]}
     size=${file_sizes[$ext]}
-    printf "%-10s %10d %10d\n" "$ext" "$count" "$size"
+    printf "%-9s %10d %17d\n" "$ext" "$count" "$size"
 done | sort -k3 -nr)
 
 # Print dashed line before total
-printf '=%.0s' {1..32}
+printf '=%.0s' {1..38}
 echo ""
 # Output total count and size with right-aligned numbers
-printf "%-10s %10d %10d\n" total ${total_count} ${total_size}
+printf "%-9s %10d %17d\n" total ${total_count} ${total_size}
