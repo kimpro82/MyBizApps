@@ -5,7 +5,7 @@ Manufacture *Github* user statistics by its REST API and crawling
 
 ### \<List>
 
-- [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories 2 (1) (2024.03.21)](#shell--calculate-the-total-number-and-size-of-files-by-extension-in-all-subdirectories-2-1-20240321)
+- [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories 2-1 (2024.03.21)](#shell--calculate-the-total-number-and-size-of-files-by-extension-in-all-subdirectories-2-1-20240321)
 - [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories (2024.03.19)](#shell--calculate-the-total-number-and-size-of-files-by-extension-in-all-subdirectories-20240319)
 - [Python : Get Daily Contribution Data by Crawling (2023.12.31)](#python--get-daily-contribution-data-by-crawling-20231231)
 - [TypeScript : List a User's Repositories (2023.10.26)](#typescript--list-a-users-repositories-20231026)
@@ -14,7 +14,7 @@ Manufacture *Github* user statistics by its REST API and crawling
 
 
 
-## [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories 2 (1) (2024.03.21)](#list)
+## [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories 2-1 (2024.03.21)](#list)
 
 - Implement in 2 scripting languages: Bash and PowerShell
 - Improvements
