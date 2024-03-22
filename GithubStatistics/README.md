@@ -5,12 +5,137 @@ Manufacture *Github* user statistics by its REST API and crawling
 
 ### \<List>
 
+- [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories 2-1 (2024.03.21)](#shell--calculate-the-total-number-and-size-of-files-by-extension-in-all-subdirectories-2-1-20240321)
 - [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories (2024.03.19)](#shell--calculate-the-total-number-and-size-of-files-by-extension-in-all-subdirectories-20240319)
 - [Python : Get Daily Contribution Data by Crawling (2023.12.31)](#python--get-daily-contribution-data-by-crawling-20231231)
 - [TypeScript : List a User's Repositories (2023.10.26)](#typescript--list-a-users-repositories-20231026)
 - [Google Sheet : Most Used Languages (2023.10.25)](#google-sheet--most-used-languages-20231025)
 - [Google Sheet : Dashboard Outline (2020.04.19)](#google-sheet--dashboard-outline-20200419)
 
+
+
+## [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories 2-1 (2024.03.21)](#list)
+
+- Implement in 2 scripting languages: Bash and PowerShell
+- Improvements
+  - Calculate the summation
+  - Sort by the total size
+- Code and Results
+  - `CalcTotalSizeByExtension2.sh`
+    <details>
+      <summary>Code</summary>
+
+    ```sh
+    # Initialize associative arrays for counting files and summing sizes
+    declare -A file_counts
+    declare -A file_sizes
+
+    # Process each file in subdirectories
+    while IFS= read -r -d '' file; do
+        ext="${file##*.}"
+        size=$(stat -c%s "$file")
+        ((file_counts[$ext]++))
+        ((file_sizes[$ext]+=$size))
+    done < <(find . -mindepth 2 -type f -print0)
+
+    # Initialize variables for total count and size
+    total_count=0
+    total_size=0
+
+    # Print the header with left-aligned extension names and right-aligned numbers
+    printf "%-9s %10s %17s\n" "Extension" "FileCount" "TotalSize(Bytes)"
+    printf '=%.0s' {1..38}
+    echo ""
+
+    # Use process substitution to sort the output
+    while read -r line; do
+        echo "$line"
+        read -r ext count size <<< "$line"
+        ((total_count += count))
+        ((total_size += size))
+    done < <(for ext in "${!file_counts[@]}"; do
+        count=${file_counts[$ext]}
+        size=${file_sizes[$ext]}
+        printf "%-9s %10d %17d\n" "$ext" "$count" "$size"
+    done | sort -k3 -nr)
+
+    # Print dashed line before total
+    printf '=%.0s' {1..38}
+    echo ""
+    # Output total count and size with right-aligned numbers
+    printf "%-9s %10d %17d\n" total ${total_count} ${total_size}
+    ```
+    </details>
+    <details open="">
+      <summary>Console Output</summary>
+
+      ```sh
+      Extension  FileCount  TotalSize(Bytes)
+      ======================================
+      ini                1               345
+      json               1               102
+      txt                2                88
+      ======================================
+      total              4               535
+      ```
+    </details>
+  - `CalcTotalSizeByExtension2.ps1`
+    <details>
+      <summary>Code</summary>
+
+    ```ps1
+    # Get all files in subdirectories
+    $files = Get-ChildItem -Path . -Recurse -File | Where-Object { $_.DirectoryName -ne (Get-Location).Path }
+
+    # Group files by extension and calculate count and total size
+    $groupedFiles = $files | Group-Object Extension | 
+    Select-Object @{Name='Extension';Expression={$_.Name -replace '^\.', ''}}, 
+                  @{Name='FileCount';Expression={$_.Count}}, 
+                  @{Name='TotalSize (Bytes)';Expression={$_.Group | Measure-Object -Property Length -Sum | Select-Object -ExpandProperty Sum}}
+
+    # Sort by total size in descending order
+    $sortedFiles = $groupedFiles | Sort-Object 'TotalSize (Bytes)' -Descending
+
+    # Convert the sorted files to a string and trim the trailing newlines
+    $sortedFilesString = $sortedFiles | Format-Table -AutoSize | Out-String -Width 4096
+    $sortedFilesString = $sortedFilesString.Trim()
+
+    # Output the trimmed string
+    Write-Host $sortedFilesString
+
+    # Calculate total count and total size
+    $totalCount = ($sortedFiles | Measure-Object -Property FileCount -Sum).Sum
+    $totalSize = ($sortedFiles | Measure-Object -Property 'TotalSize (Bytes)' -Sum).Sum
+
+    # Create a custom object to align the total summary with the table columns
+    $totalSummary = New-Object PSObject -Property @{
+        Extension = 'Total'
+        FileCount = $totalCount
+        'TotalSize (Bytes)' = $totalSize
+    }
+
+    # Convert the total summary to a string and remove empty lines
+    $totalSummaryString = $totalSummary | Format-Table -Property Extension, FileCount, 'TotalSize (Bytes)' -HideTableHeaders | Out-String -Width 4096
+    $totalSummaryString = $totalSummaryString.Trim()
+
+    # Output the total summary without extra line breaks
+    Write-Host "--------- --------- -----------------"
+    Write-Host $totalSummaryString
+    ```
+    </details>
+    <details open="">
+      <summary>Console Output</summary>
+
+      ```ps1
+      Extension FileCount TotalSize (Bytes)
+      --------- --------- -----------------
+      ini               1               345
+      json              1               102
+      txt               2                88
+      --------- --------- -----------------
+      Total             4               535
+      ```
+    </details>
 
 
 ## [Shell : Calculate the Total Number and Size of Files by Extension in All Subdirectories (2024.03.19)](#list)
