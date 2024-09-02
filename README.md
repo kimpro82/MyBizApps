@@ -26,6 +26,7 @@
 
 ## [VBA](#list)
 
+  - [Progress Rate Tracker 2 (2024.09.02)](/VBA/ProgressRateTracker/README.md#progress-rate-tracker-2-20240902)
   - [Array Assignment (2024.02.26)](/VBA/ArrayAssign/README.md#array-assignment-20240226)
   - [Progress Rate Tracker (2024.02.09)](/VBA/ProgressRateTracker/README.md#progress-rate-tracker-20240209)
   - [List Sheet Names (2023.11.15)](/VBA/ListSheetNames/README.md#list-sheet-names-20231115)
