@@ -1,5 +1,5 @@
 '*********************************************************************
-' Progress Rate Tracker for Development Plan
+' Progress Rate Tracker for Development Plan (Burn-up Chart)
 ' Date: 2024.09.02
 '
 ' This Excel VBA script is designed to track and update progress rates
