@@ -11,7 +11,7 @@
 
 ## [Progress Rate Tracker 2 (2024.09.02)](#list)
 
-  - A Burn-up chart for a development plan
+  - A **Burn-up chart** for a development plan (Not a continuously upgraded version from [Progress Rate Tracker (2024.02.09)](#progress-rate-tracker-20240209))
     - Calculates total, done, and remained rates for each day
       - Total rate: Calculate based on the weighted contribution of tasks with any progress indicated by cell color
     - Only updates done and remained rates up to the current day
