@@ -53,7 +53,14 @@ Private Const DATA_START_ROW As Long = 28         ' Row number where the data st
 Private Const TODAY_LOC As String = "C23"         ' Cell location where the current day is stored
 
 
-' Subroutine to update the progress tracking values
+' Core procedure to update the progress tracking values.
+' This is the main function responsible for calculating and updating the
+' progress data within the spreadsheet. It handles clearing outdated data,
+' calculating total, done, and remained rates, and ensuring that only relevant
+' data up to the current day is processed.
+'
+' Parameters: None
+' Returns: None
 Private Sub UpdateValues()
 
     Dim rateStartColNum As Long                   ' Column number where rate tracking starts
