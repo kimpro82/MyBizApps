@@ -13,6 +13,7 @@
 
   - A Burn-up chart for a development plan
     - Calculates total, done, and remained rates for each day
+      - Total rate: Calculate based on the weighted contribution of tasks with any progress indicated by cell color
     - Only updates done and remained rates up to the current day
   
     ![Progress Rate Tracker 2](./Images/ProgressRateTracker_2.png)
