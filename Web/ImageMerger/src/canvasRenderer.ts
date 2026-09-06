@@ -40,16 +40,23 @@ export function renderMergedCanvas(
 
   if (items.length === 0) {
     canvas.width = 800;
-    canvas.height = 400;
+    canvas.height = 420;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // Draw placeholder pattern or message
-    ctx.fillStyle = '#f3f4f6';
+
+    // Draw modern empty state canvas placeholder
+    ctx.fillStyle = '#1e293b';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#9ca3af';
-    ctx.font = '16px sans-serif';
+
+    ctx.fillStyle = '#94a3af';
+    ctx.font = '500 16px "Noto Sans KR", sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('No images uploaded yet. Drag & drop or click "Add Images" to start.', canvas.width / 2, canvas.height / 2);
+    ctx.fillText('업로드된 이미지가 없습니다.', canvas.width / 2, canvas.height / 2 - 12);
+
+    ctx.fillStyle = '#64748b';
+    ctx.font = '400 13px "Noto Sans KR", sans-serif';
+    ctx.fillText('왼쪽 영역에 이미지를 드래그하거나 선택하여 병합을 시작하세요.', canvas.width / 2, canvas.height / 2 + 16);
+
     return { width: canvas.width, height: canvas.height };
   }
 
@@ -101,7 +108,6 @@ export function renderMergedCanvas(
     const col = index % columns;
     const row = Math.floor(index / columns);
 
-    // Calculate cell top-left corner
     let cellX = settings.padding;
     for (let c = 0; c < col; c++) {
       cellX += colWidths[c] + settings.spacing;
@@ -119,7 +125,6 @@ export function renderMergedCanvas(
     const effWidth = (isRotated90or270 ? item.originalHeight : item.originalWidth) * item.scale;
     const effHeight = (isRotated90or270 ? item.originalWidth : item.originalHeight) * item.scale;
 
-    // Center image inside cell
     const drawX = cellX + (cellW - effWidth) / 2;
     const drawY = cellY + (cellH - effHeight) / 2;
 
@@ -127,15 +132,12 @@ export function renderMergedCanvas(
     const rawDrawHeight = item.originalHeight * item.scale;
 
     ctx.save();
-    // Translate to center of image position
     ctx.translate(drawX + effWidth / 2, drawY + effHeight / 2);
 
-    // Apply rotation
     if (item.rotation !== 0) {
       ctx.rotate((item.rotation * Math.PI) / 180);
     }
 
-    // Apply flips
     const scaleX = item.flipH ? -1 : 1;
     const scaleY = item.flipV ? -1 : 1;
     ctx.scale(scaleX, scaleY);

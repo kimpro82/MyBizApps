@@ -66,7 +66,7 @@ export class ImageMergerApp {
         colsInput.addEventListener('input', () => {
             const val = parseInt(colsInput.value, 10);
             this.settings.customColumns = val;
-            colsVal.textContent = String(val);
+            colsVal.textContent = `${val}개`;
             this.renderCanvas();
         });
         // Spacing Slider
@@ -144,7 +144,7 @@ export class ImageMergerApp {
     handleFiles(files) {
         const validFiles = files.filter((f) => f.type.startsWith('image/'));
         if (validFiles.length === 0) {
-            this.showToast('Please select valid image files.', 'error');
+            this.showToast('올바른 이미지 파일을 선택해주세요.', 'error');
             return;
         }
         let loadedCount = 0;
@@ -169,7 +169,7 @@ export class ImageMergerApp {
                     if (loadedCount === validFiles.length) {
                         this.renderItemList();
                         this.renderCanvas();
-                        this.showToast(`Added ${loadedCount} image${loadedCount > 1 ? 's' : ''}.`, 'success');
+                        this.showToast(`${loadedCount}개의 이미지가 추가되었습니다.`, 'success');
                     }
                 };
                 img.src = e.target?.result;
@@ -180,11 +180,11 @@ export class ImageMergerApp {
     renderItemList() {
         const itemsListContainer = document.getElementById('items-list');
         const countBadge = document.getElementById('items-count-badge');
-        countBadge.textContent = `${this.items.length} item${this.items.length !== 1 ? 's' : ''}`;
+        countBadge.textContent = `${this.items.length}개`;
         if (this.items.length === 0) {
             itemsListContainer.innerHTML = `
         <div class="empty-list-message">
-          <p>No images added yet.</p>
+          <p>업로드된 이미지가 없습니다.</p>
         </div>
       `;
             return;
@@ -199,7 +199,7 @@ export class ImageMergerApp {
             card.innerHTML = `
         <div class="item-header">
           <div class="item-info">
-            <span class="drag-handle" title="Drag to reorder">
+            <span class="drag-handle" title="드래그하여 순서 변경">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg>
             </span>
             <img src="${item.element.src}" class="item-thumb" alt="${item.name}" />
@@ -207,29 +207,29 @@ export class ImageMergerApp {
           </div>
 
           <div class="item-actions">
-            <button type="button" class="action-icon-btn ${item.flipH ? 'active' : ''}" data-action="fliph" title="Flip Horizontal">
+            <button type="button" class="action-icon-btn ${item.flipH ? 'active' : ''}" data-action="fliph" title="좌우 수평 반전">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 7 5 5-5 5V7z"/><path d="m21 7-5 5 5 5V7z"/><line x1="12" x2="12" y1="4" y2="20"/></svg>
             </button>
-            <button type="button" class="action-icon-btn ${item.flipV ? 'active' : ''}" data-action="flipv" title="Flip Vertical">
+            <button type="button" class="action-icon-btn ${item.flipV ? 'active' : ''}" data-action="flipv" title="상하 수직 반전">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 3 5 5 5-5H7z"/><path d="m7 21 5-5 5 5H7z"/><line x1="4" x2="20" y1="12" y2="12"/></svg>
             </button>
-            <button type="button" class="action-icon-btn" data-action="rotate" title="Rotate 90°">
+            <button type="button" class="action-icon-btn" data-action="rotate" title="90° 회전">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
             </button>
-            <button type="button" class="action-icon-btn" data-action="up" title="Move Up" ${index === 0 ? 'disabled style="opacity:0.3"' : ''}>
+            <button type="button" class="action-icon-btn" data-action="up" title="위로 이동" ${index === 0 ? 'disabled style="opacity:0.3"' : ''}>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
             </button>
-            <button type="button" class="action-icon-btn" data-action="down" title="Move Down" ${index === this.items.length - 1 ? 'disabled style="opacity:0.3"' : ''}>
+            <button type="button" class="action-icon-btn" data-action="down" title="아래로 이동" ${index === this.items.length - 1 ? 'disabled style="opacity:0.3"' : ''}>
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
-            <button type="button" class="action-icon-btn danger" data-action="delete" title="Delete Image">
+            <button type="button" class="action-icon-btn danger" data-action="delete" title="이미지 삭제">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
             </button>
           </div>
         </div>
 
         <div class="item-controls-row">
-          <span class="scale-label">Scale: ${item.scale.toFixed(2)}x</span>
+          <span class="scale-label">배율: ${item.scale.toFixed(2)}배</span>
           <input type="range" class="range-input scale-slider" min="0.2" max="2.0" step="0.05" value="${item.scale}" data-id="${item.id}" />
         </div>
       `;
@@ -240,7 +240,7 @@ export class ImageMergerApp {
                 item.scale = val;
                 const label = card.querySelector('.scale-label');
                 if (label)
-                    label.textContent = `Scale: ${val.toFixed(2)}x`;
+                    label.textContent = `배율: ${val.toFixed(2)}배`;
                 this.renderCanvas();
             });
             card.querySelectorAll('.action-icon-btn').forEach((btn) => {
@@ -343,10 +343,10 @@ export class ImageMergerApp {
         const canvasWrapper = this.canvas.parentElement;
         if (this.zoomLevel === 1.0) {
             if (zoomVal)
-                zoomVal.textContent = 'Fit';
+                zoomVal.textContent = '자동 맞춤';
             canvasWrapper.style.transform = 'scale(1.0)';
             this.canvas.style.maxWidth = '100%';
-            this.canvas.style.maxHeight = '80vh';
+            this.canvas.style.maxHeight = '78vh';
             this.canvas.style.height = 'auto';
             this.canvas.style.width = 'auto';
         }
@@ -363,7 +363,7 @@ export class ImageMergerApp {
     }
     downloadCanvas() {
         if (this.items.length === 0) {
-            this.showToast('Please add at least one image to download.', 'error');
+            this.showToast('다운로드할 이미지를 1개 이상 추가해주세요.', 'error');
             return;
         }
         const filenameInput = document.getElementById('input-filename');
@@ -377,17 +377,17 @@ export class ImageMergerApp {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        this.showToast(`Downloaded: ${filename}`, 'success');
+        this.showToast(`이미지 다운로드 시작: ${filename}`, 'success');
     }
     async copyToClipboard() {
         if (this.items.length === 0) {
-            this.showToast('Please add at least one image to copy.', 'error');
+            this.showToast('클립보드에 복사할 이미지를 1개 이상 추가해주세요.', 'error');
             return;
         }
         try {
             this.canvas.toBlob(async (blob) => {
                 if (!blob) {
-                    this.showToast('Failed to generate image blob.', 'error');
+                    this.showToast('이미지 생성에 실패했습니다.', 'error');
                     return;
                 }
                 try {
@@ -396,27 +396,27 @@ export class ImageMergerApp {
                             [blob.type]: blob,
                         }),
                     ]);
-                    this.showToast('Merged image copied to clipboard!', 'success');
+                    this.showToast('병합된 이미지가 클립보드에 복사되었습니다!', 'success');
                 }
                 catch (err) {
                     console.error(err);
-                    this.showToast('Clipboard copy failed. Try downloading instead.', 'error');
+                    this.showToast('클립보드 복사 실패. 다운로드 기능을 이용해주세요.', 'error');
                 }
             }, 'image/png');
         }
         catch (e) {
             console.error(e);
-            this.showToast('Clipboard API not supported in this browser.', 'error');
+            this.showToast('현재 브라우저에서 클립보드 복사 기능을 지원하지 않습니다.', 'error');
         }
     }
     clearAll() {
         if (this.items.length === 0)
             return;
-        if (confirm('Are you sure you want to remove all uploaded images?')) {
+        if (confirm('업로드된 모든 이미지를 삭제하시겠습니까?')) {
             this.items = [];
             this.renderItemList();
             this.renderCanvas();
-            this.showToast('All images cleared.', 'success');
+            this.showToast('모든 이미지가 삭제되었습니다.', 'success');
         }
     }
     showToast(message, type = 'success') {
