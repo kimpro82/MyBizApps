@@ -1,5 +1,6 @@
 export type LayoutMode = 'auto' | 'horizontal' | 'vertical' | 'custom';
 export type ExportFormat = 'image/png' | 'image/jpeg' | 'image/webp';
+export type SizeStandardization = 'outlierMax' | 'rowEqualize' | 'original';
 
 export interface ImageItem {
   id: string;
@@ -22,4 +23,6 @@ export interface CanvasSettings {
   exportFormat: ExportFormat;
   exportQuality: number; // 0.1 to 1.0
   customWidthLimit: number; // 0 = original resolution calculated, or max width in px
+  sizeStandardization: SizeStandardization; // Standardization strategy without cropping
 }
+

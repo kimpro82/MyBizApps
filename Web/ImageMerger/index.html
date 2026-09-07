@@ -94,6 +94,22 @@
               </div>
             </div>
 
+            <!-- Size Standardization (Prevent Crop) -->
+            <div class="control-group">
+              <label class="control-label">크기 표준화 (잘림 방지)</label>
+              <div class="segmented-control vertical-stack" id="size-standardization-group">
+                <button type="button" class="segment-btn active" data-standard="outlierMax" title="극단적 아웃라이어를 제외한 최대 높이 기준 표준화">
+                  <span>아웃라이어 제외 최대 높이</span>
+                </button>
+                <button type="button" class="segment-btn" data-standard="rowEqualize" title="각 줄(행) 내부 높이를 균일화하여 여백 감소">
+                  <span>행별 높이 균일화</span>
+                </button>
+                <button type="button" class="segment-btn" data-standard="original" title="개별 이미지 개별 해상도/배율 유지">
+                  <span>원본 크기 유지</span>
+                </button>
+              </div>
+            </div>
+
             <!-- Custom columns (hidden unless custom mode selected) -->
             <div class="control-group" id="group-custom-cols" style="display: none;">
               <div class="control-header">

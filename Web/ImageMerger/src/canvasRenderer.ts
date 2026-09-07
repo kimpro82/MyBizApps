@@ -1,5 +1,19 @@
 import { CanvasSettings, ImageItem, LayoutMode } from './types';
 
+export function calculateOutlierMax(values: number[]): number {
+  if (values.length === 0) return 0;
+  if (values.length <= 2) return Math.max(...values);
+
+  const sorted = [...values].slice().sort((a, b) => a - b);
+  const q1 = sorted[Math.floor(sorted.length * 0.25)];
+  const q3 = sorted[Math.floor(sorted.length * 0.75)];
+  const iqr = q3 - q1;
+  const upperBound = q3 + 1.5 * iqr;
+
+  const validValues = sorted.filter((v) => v <= upperBound);
+  return validValues.length > 0 ? Math.max(...validValues) : sorted[sorted.length - 1];
+}
+
 export function calculateGridDimensions(
   count: number,
   mode: LayoutMode,
@@ -66,20 +80,80 @@ export function renderMergedCanvas(
     settings.customColumns
   );
 
+  // Prepare aspect ratios and native dimensions for items
+  const itemDimensions = items.map((item) => {
+    const isRotated90or270 = item.rotation % 180 !== 0;
+    const nativeW = isRotated90or270 ? item.originalHeight : item.originalWidth;
+    const nativeH = isRotated90or270 ? item.originalWidth : item.originalHeight;
+    const aspect = nativeW / nativeH;
+
+    return {
+      item,
+      nativeW,
+      nativeH,
+      aspect,
+      isRotated90or270,
+    };
+  });
+
+  // Calculate target heights based on standardization setting (preventing cropping)
+  let targetHeights: number[] = [];
+
+  if (settings.sizeStandardization === 'outlierMax') {
+    const rawHeights = itemDimensions.map((d) => d.nativeH * d.item.scale);
+    const globalTargetH = calculateOutlierMax(rawHeights);
+    targetHeights = new Array(items.length).fill(globalTargetH);
+  } else if (settings.sizeStandardization === 'rowEqualize') {
+    targetHeights = new Array(items.length).fill(0);
+    for (let r = 0; r < rows; r++) {
+      const rowIndexes: number[] = [];
+      for (let i = 0; i < items.length; i++) {
+        if (Math.floor(i / columns) === r) {
+          rowIndexes.push(i);
+        }
+      }
+      const rowRawHeights = rowIndexes.map((idx) => itemDimensions[idx].nativeH * itemDimensions[idx].item.scale);
+      const rowTargetH = calculateOutlierMax(rowRawHeights);
+      rowIndexes.forEach((idx) => {
+        targetHeights[idx] = rowTargetH;
+      });
+    }
+  }
+
+  const computedItems = itemDimensions.map((d, index) => {
+    let effWidth: number;
+    let effHeight: number;
+    let effectiveScaleFactor: number;
+
+    if (settings.sizeStandardization === 'original') {
+      effWidth = d.nativeW * d.item.scale;
+      effHeight = d.nativeH * d.item.scale;
+      effectiveScaleFactor = d.item.scale;
+    } else {
+      const targetH = targetHeights[index];
+      effHeight = targetH * d.item.scale;
+      effWidth = targetH * d.aspect * d.item.scale;
+      effectiveScaleFactor = effHeight / d.nativeH;
+    }
+
+    return {
+      ...d,
+      effWidth,
+      effHeight,
+      effectiveScaleFactor,
+    };
+  });
+
   // Calculate cell widths and heights
   const colWidths: number[] = new Array(columns).fill(0);
   const rowHeights: number[] = new Array(rows).fill(0);
 
-  items.forEach((item, index) => {
+  computedItems.forEach((cItem, index) => {
     const col = index % columns;
     const row = Math.floor(index / columns);
 
-    const isRotated90or270 = item.rotation % 180 !== 0;
-    const effWidth = (isRotated90or270 ? item.originalHeight : item.originalWidth) * item.scale;
-    const effHeight = (isRotated90or270 ? item.originalWidth : item.originalHeight) * item.scale;
-
-    if (effWidth > colWidths[col]) colWidths[col] = effWidth;
-    if (effHeight > rowHeights[row]) rowHeights[row] = effHeight;
+    if (cItem.effWidth > colWidths[col]) colWidths[col] = cItem.effWidth;
+    if (cItem.effHeight > rowHeights[row]) rowHeights[row] = cItem.effHeight;
   });
 
   const totalColWidth = colWidths.reduce((a, b) => a + b, 0);
@@ -103,8 +177,8 @@ export function renderMergedCanvas(
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
-  // Draw images inside grid cells
-  items.forEach((item, index) => {
+  // Draw images inside grid cells (aspect ratio preserved, no crop)
+  computedItems.forEach((cItem, index) => {
     const col = index % columns;
     const row = Math.floor(index / columns);
 
@@ -121,29 +195,25 @@ export function renderMergedCanvas(
     const cellW = colWidths[col];
     const cellH = rowHeights[row];
 
-    const isRotated90or270 = item.rotation % 180 !== 0;
-    const effWidth = (isRotated90or270 ? item.originalHeight : item.originalWidth) * item.scale;
-    const effHeight = (isRotated90or270 ? item.originalWidth : item.originalHeight) * item.scale;
+    const drawX = cellX + (cellW - cItem.effWidth) / 2;
+    const drawY = cellY + (cellH - cItem.effHeight) / 2;
 
-    const drawX = cellX + (cellW - effWidth) / 2;
-    const drawY = cellY + (cellH - effHeight) / 2;
-
-    const rawDrawWidth = item.originalWidth * item.scale;
-    const rawDrawHeight = item.originalHeight * item.scale;
+    const rawDrawWidth = cItem.item.originalWidth * cItem.effectiveScaleFactor;
+    const rawDrawHeight = cItem.item.originalHeight * cItem.effectiveScaleFactor;
 
     ctx.save();
-    ctx.translate(drawX + effWidth / 2, drawY + effHeight / 2);
+    ctx.translate(drawX + cItem.effWidth / 2, drawY + cItem.effHeight / 2);
 
-    if (item.rotation !== 0) {
-      ctx.rotate((item.rotation * Math.PI) / 180);
+    if (cItem.item.rotation !== 0) {
+      ctx.rotate((cItem.item.rotation * Math.PI) / 180);
     }
 
-    const scaleX = item.flipH ? -1 : 1;
-    const scaleY = item.flipV ? -1 : 1;
+    const scaleX = cItem.item.flipH ? -1 : 1;
+    const scaleY = cItem.item.flipV ? -1 : 1;
     ctx.scale(scaleX, scaleY);
 
     ctx.drawImage(
-      item.element,
+      cItem.item.element,
       -rawDrawWidth / 2,
       -rawDrawHeight / 2,
       rawDrawWidth,
@@ -155,3 +225,4 @@ export function renderMergedCanvas(
 
   return { width: canvas.width, height: canvas.height };
 }
+

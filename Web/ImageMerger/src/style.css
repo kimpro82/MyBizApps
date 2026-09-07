@@ -381,6 +381,15 @@ body {
   gap: 4px;
 }
 
+.segmented-control.vertical-stack {
+  flex-direction: column;
+}
+
+.segmented-control.vertical-stack .segment-btn {
+  text-align: left;
+  padding: 8px 12px;
+}
+
 .segment-btn {
   flex: 1;
   background: none;

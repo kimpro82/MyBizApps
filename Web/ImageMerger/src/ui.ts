@@ -1,4 +1,4 @@
-import { CanvasSettings, ImageItem, LayoutMode, ExportFormat } from './types';
+import { CanvasSettings, ImageItem, LayoutMode, ExportFormat, SizeStandardization } from './types';
 import { renderMergedCanvas } from './canvasRenderer';
 
 export class ImageMergerApp {
@@ -12,6 +12,7 @@ export class ImageMergerApp {
     exportFormat: 'image/png',
     exportQuality: 0.92,
     customWidthLimit: 0,
+    sizeStandardization: 'outlierMax',
   };
 
   private zoomLevel: number = 1.0; // 1.0 = Fit screen / natural
@@ -72,6 +73,19 @@ export class ImageMergerApp {
           customColsGroup.style.display = 'none';
         }
 
+        this.renderCanvas();
+      });
+    });
+
+    // 3. Size Standardization Buttons (Prevent Crop)
+    const standardBtns = document.querySelectorAll('#size-standardization-group .segment-btn');
+    standardBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        standardBtns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const standard = btn.getAttribute('data-standard') as SizeStandardization;
+        this.settings.sizeStandardization = standard;
         this.renderCanvas();
       });
     });
