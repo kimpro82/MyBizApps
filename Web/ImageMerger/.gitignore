@@ -4,6 +4,7 @@ node_modules
 
 # Production build output
 dist
+dist-js
 dist-ssr
 
 # Logs
