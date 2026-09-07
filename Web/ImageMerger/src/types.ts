@@ -24,5 +24,6 @@ export interface CanvasSettings {
   exportQuality: number; // 0.1 to 1.0
   customWidthLimit: number; // 0 = original resolution calculated, or max width in px
   sizeStandardization: SizeStandardization; // Standardization strategy without cropping
+  allowAspectDistortion: boolean; // Allow aspect ratio change to fit exact cell dimensions
 }
 

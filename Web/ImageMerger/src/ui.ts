@@ -13,6 +13,7 @@ export class ImageMergerApp {
     exportQuality: 0.92,
     customWidthLimit: 0,
     sizeStandardization: 'outlierMax',
+    allowAspectDistortion: false,
   };
 
   private zoomLevel: number = 1.0; // 1.0 = Fit screen / natural
@@ -88,6 +89,13 @@ export class ImageMergerApp {
         this.settings.sizeStandardization = standard;
         this.renderCanvas();
       });
+    });
+
+    // 4. Allow Aspect Ratio Distortion Checkbox
+    const chkDistortion = document.getElementById('chk-allow-distortion') as HTMLInputElement;
+    chkDistortion?.addEventListener('change', () => {
+      this.settings.allowAspectDistortion = chkDistortion.checked;
+      this.renderCanvas();
     });
 
     // Custom Columns Slider

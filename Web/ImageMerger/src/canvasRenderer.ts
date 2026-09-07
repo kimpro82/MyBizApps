@@ -96,15 +96,20 @@ export function renderMergedCanvas(
     };
   });
 
-  // Calculate target heights based on standardization setting (preventing cropping)
-  let targetHeights: number[] = [];
+  // Calculate target heights & widths based on standardization setting and layout mode
+  let targetHeights: number[] = new Array(items.length).fill(0);
+  let targetWidths: number[] = new Array(items.length).fill(0);
+
+  const rawHeights = itemDimensions.map((d) => d.nativeH * d.item.scale);
+  const rawWidths = itemDimensions.map((d) => d.nativeW * d.item.scale);
+
+  const globalTargetH = calculateOutlierMax(rawHeights);
+  const globalTargetW = calculateOutlierMax(rawWidths);
 
   if (settings.sizeStandardization === 'outlierMax') {
-    const rawHeights = itemDimensions.map((d) => d.nativeH * d.item.scale);
-    const globalTargetH = calculateOutlierMax(rawHeights);
-    targetHeights = new Array(items.length).fill(globalTargetH);
+    targetHeights.fill(globalTargetH);
+    targetWidths.fill(globalTargetW);
   } else if (settings.sizeStandardization === 'rowEqualize') {
-    targetHeights = new Array(items.length).fill(0);
     for (let r = 0; r < rows; r++) {
       const rowIndexes: number[] = [];
       for (let i = 0; i < items.length; i++) {
@@ -113,9 +118,14 @@ export function renderMergedCanvas(
         }
       }
       const rowRawHeights = rowIndexes.map((idx) => itemDimensions[idx].nativeH * itemDimensions[idx].item.scale);
+      const rowRawWidths = rowIndexes.map((idx) => itemDimensions[idx].nativeW * itemDimensions[idx].item.scale);
+
       const rowTargetH = calculateOutlierMax(rowRawHeights);
+      const rowTargetW = calculateOutlierMax(rowRawWidths);
+
       rowIndexes.forEach((idx) => {
         targetHeights[idx] = rowTargetH;
+        targetWidths[idx] = rowTargetW;
       });
     }
   }
@@ -123,24 +133,34 @@ export function renderMergedCanvas(
   const computedItems = itemDimensions.map((d, index) => {
     let effWidth: number;
     let effHeight: number;
-    let effectiveScaleFactor: number;
+    const targetH = targetHeights[index];
+    const targetW = targetWidths[index];
 
     if (settings.sizeStandardization === 'original') {
       effWidth = d.nativeW * d.item.scale;
       effHeight = d.nativeH * d.item.scale;
-      effectiveScaleFactor = d.item.scale;
-    } else {
-      const targetH = targetHeights[index];
+    } else if (settings.allowAspectDistortion) {
+      effWidth = targetW * d.item.scale;
       effHeight = targetH * d.item.scale;
-      effWidth = targetH * d.aspect * d.item.scale;
-      effectiveScaleFactor = effHeight / d.nativeH;
+    } else {
+      if (settings.layoutMode === 'vertical') {
+        effWidth = targetW * d.item.scale;
+        effHeight = (targetW / d.aspect) * d.item.scale;
+      } else {
+        effHeight = targetH * d.item.scale;
+        effWidth = targetH * d.aspect * d.item.scale;
+      }
     }
+
+    const effectiveScaleX = effWidth / d.nativeW;
+    const effectiveScaleY = effHeight / d.nativeH;
 
     return {
       ...d,
       effWidth,
       effHeight,
-      effectiveScaleFactor,
+      effectiveScaleX,
+      effectiveScaleY,
     };
   });
 
@@ -177,7 +197,7 @@ export function renderMergedCanvas(
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
-  // Draw images inside grid cells (aspect ratio preserved, no crop)
+  // Draw images inside grid cells
   computedItems.forEach((cItem, index) => {
     const col = index % columns;
     const row = Math.floor(index / columns);
@@ -198,8 +218,8 @@ export function renderMergedCanvas(
     const drawX = cellX + (cellW - cItem.effWidth) / 2;
     const drawY = cellY + (cellH - cItem.effHeight) / 2;
 
-    const rawDrawWidth = cItem.item.originalWidth * cItem.effectiveScaleFactor;
-    const rawDrawHeight = cItem.item.originalHeight * cItem.effectiveScaleFactor;
+    const rawDrawWidth = cItem.item.originalWidth * (cItem.isRotated90or270 ? cItem.effectiveScaleY : cItem.effectiveScaleX);
+    const rawDrawHeight = cItem.item.originalHeight * (cItem.isRotated90or270 ? cItem.effectiveScaleX : cItem.effectiveScaleY);
 
     ctx.save();
     ctx.translate(drawX + cItem.effWidth / 2, drawY + cItem.effHeight / 2);
