@@ -223,7 +223,13 @@
                   <svg class="panel-toggle-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                 </button>
               </h2>
-              <span id="items-count-badge" class="count-badge">0개</span>
+              <div class="panel-header-actions">
+                <span id="items-count-badge" class="count-badge">0개</span>
+                <button type="button" id="btn-reset-items" class="btn btn-ghost btn-xs" title="모든 이미지 설정을 기본값으로 초기화">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+                  초기화
+                </button>
+              </div>
             </div>
 
             <div id="items-list" class="items-list">

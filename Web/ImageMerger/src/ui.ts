@@ -187,11 +187,13 @@ export class ImageMergerApp {
     const btnDownloadSide = document.getElementById('btn-download-side');
     const btnCopyClipboard = document.getElementById('btn-copy-clipboard');
     const btnClearAll = document.getElementById('btn-clear-all');
+    const btnResetItems = document.getElementById('btn-reset-items');
 
     btnDownloadTop?.addEventListener('click', () => this.downloadCanvas());
     btnDownloadSide?.addEventListener('click', () => this.downloadCanvas());
     btnCopyClipboard?.addEventListener('click', () => this.copyToClipboard());
     btnClearAll?.addEventListener('click', () => this.clearAll());
+    btnResetItems?.addEventListener('click', () => this.resetItemSettings());
 
     // Zoom Controls
     const btnZoomIn = document.getElementById('btn-zoom-in');
@@ -502,6 +504,21 @@ export class ImageMergerApp {
       this.renderCanvas();
       this.showToast('모든 이미지가 삭제되었습니다.', 'success');
     }
+  }
+
+  private resetItemSettings(): void {
+    if (this.items.length === 0) return;
+
+    this.items.forEach((item) => {
+      item.scale = 1.0;
+      item.flipH = false;
+      item.flipV = false;
+      item.rotation = 0;
+    });
+
+    this.renderItemList();
+    this.renderCanvas();
+    this.showToast('모든 이미지 설정이 기본값으로 초기화되었습니다.', 'success');
   }
 
   private showToast(message: string, type: 'success' | 'error' = 'success'): void {

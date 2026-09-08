@@ -295,6 +295,12 @@ body {
   margin-bottom: 0;
 }
 
+.panel-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .count-badge {
   font-size: 0.78rem;
   background-color: var(--primary-light);
