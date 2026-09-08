@@ -24,6 +24,11 @@
   - [Google Sheet : Dashboard Outline (2020.04.19)](/GithubStatistics/README.md#google-sheet--dashboard-outline-20200419)
 
 
+## [Web](#list)
+
+  - [Image Merger v1.0 Beta](./Web/ImageMerger/README.md)
+
+
 ## [VBA](#list)
 
   - [Progress Rate Tracker 2 (2024.09.02)](/VBA/ProgressRateTracker/README.md#progress-rate-tracker-2-20240902)
