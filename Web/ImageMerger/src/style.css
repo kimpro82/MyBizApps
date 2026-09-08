@@ -296,6 +296,38 @@ body {
   margin-bottom: 14px;
 }
 
+.panel-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.panel-toggle-chevron {
+  margin-left: auto;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+
+.panel.collapsed > .panel-title ~ * {
+  display: none;
+}
+
+.panel.collapsed .panel-header-with-count {
+  margin-bottom: 0;
+}
+
+.panel.collapsed .panel-toggle-chevron {
+  transform: rotate(-90deg);
+}
+
 .panel-header-with-count {
   display: flex;
   align-items: center;

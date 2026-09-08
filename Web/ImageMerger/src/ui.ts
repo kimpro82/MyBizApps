@@ -37,6 +37,16 @@ export class ImageMergerApp {
       toggleSidebar.title = isCollapsed ? '메뉴 펼치기' : '메뉴 접기';
     });
 
+    document.querySelectorAll('.panel-toggle').forEach((toggle) => {
+      toggle.addEventListener('click', () => {
+        const panel = toggle.closest('.panel');
+        if (!panel) return;
+
+        const isCollapsed = panel.classList.toggle('collapsed');
+        toggle.setAttribute('aria-expanded', String(!isCollapsed));
+      });
+    });
+
     // 1. File Upload & Drag & Drop
     const fileInput = document.getElementById('file-input') as HTMLInputElement;
     const dropZone = document.getElementById('drop-zone') as HTMLElement;
