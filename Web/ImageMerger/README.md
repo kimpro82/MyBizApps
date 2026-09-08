@@ -10,6 +10,7 @@ All image processing is performed locally in the browser; source images are not 
 - [Features](#features)
 - [Usage](#usage)
 - [Development](#development)
+- [GitHub Pages Deployment](#github-pages-deployment)
 - [Project Structure](#project-structure)
 - [Implementation Notes](#implementation-notes)
 - [Future Improvements](#future-improvements)
@@ -103,6 +104,20 @@ The build command performs the following steps:
 ```bash
 npm run preview
 ```
+
+## [GitHub Pages Deployment](#github-pages-deployment)
+
+The repository includes a GitHub Actions workflow at
+[`.github/workflows/deploy-image-merger.yml`](../../.github/workflows/deploy-image-merger.yml).
+It builds the app from `Web/ImageMerger`, keeps the repository root `index.html` as the redirect entry point, and publishes the generated app at `Web/ImageMerger/dist/`.
+
+To enable deployment:
+
+1. Open the repository's **Settings > Pages** page.
+2. Set **Source** to **GitHub Actions**.
+3. Push to the `tsImageMerger` branch or run the workflow manually from the **Actions** tab.
+
+The workflow installs dependencies with `npm ci`, runs `npm run build`, and deploys the resulting Pages artifact.
 
 
 ## [Project Structure](#list)
