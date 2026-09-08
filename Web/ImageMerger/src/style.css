@@ -1,3 +1,14 @@
+/*
+ * Visual design system and responsive layout styles for the ImageMerger app.
+ *
+ * author: kimpro82
+ * date: 2026.09.08
+ * history:
+ * 2026.09.06 - Added the initial dark workspace, controls, panels, and preview styles.
+ * 2026.09.07 - Updated styles for image standardization and aspect-ratio controls.
+ * 2026.09.08 - Added collapsible panels, reset controls, and grayscale color presets.
+ */
+ 
 :root {
   --primary-color: #3b82f6;
   --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);

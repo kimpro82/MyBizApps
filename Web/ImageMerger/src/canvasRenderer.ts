@@ -1,5 +1,24 @@
+/**
+ * Canvas layout calculation and rendering utilities for the ImageMerger app.
+ *
+ * @author kimpro82
+ * @date 2026.09.08
+ * @history
+ * 2026.09.06 - Initialized core image-merging and canvas-rendering behavior.
+ * 2026.09.07 - Added size-standardization and aspect-ratio distortion handling.
+ * 2026.09.08 - Refined rendering support for the latest ImageMerger controls.
+ */
+
 import { CanvasSettings, ImageItem, LayoutMode } from './types';
 
+/**
+ * Returns the largest value that is not an upper outlier according to the
+ * 1.5 IQR rule. This prevents a single unusually large image from defining
+ * the standardized size of every other image.
+ *
+ * @param values Candidate dimensions to inspect.
+ * @returns The largest non-outlier value, or zero for an empty array.
+ */
 export function calculateOutlierMax(values: number[]): number {
   if (values.length === 0) return 0;
   if (values.length <= 2) return Math.max(...values);
@@ -14,6 +33,15 @@ export function calculateOutlierMax(values: number[]): number {
   return validValues.length > 0 ? Math.max(...validValues) : sorted[sorted.length - 1];
 }
 
+/**
+ * Calculates the number of columns and rows required for the selected layout.
+ * Empty collections return zero dimensions so callers can handle them safely.
+ *
+ * @param count Number of images in the collection.
+ * @param mode Layout strategy selected by the user.
+ * @param customColumns Requested column count for custom layouts.
+ * @returns The calculated column and row counts.
+ */
 export function calculateGridDimensions(
   count: number,
   mode: LayoutMode,
@@ -32,7 +60,7 @@ export function calculateGridDimensions(
     }
     case 'auto':
     default: {
-      // Dynamic auto layout aiming for balanced square / 4:3 grid
+      // Use explicit small-count layouts before falling back to a near-square grid.
       if (count === 1) return { columns: 1, rows: 1 };
       if (count === 2) return { columns: 2, rows: 1 };
       if (count === 3) return { columns: 3, rows: 1 };
@@ -44,6 +72,15 @@ export function calculateGridDimensions(
   }
 }
 
+/**
+ * Computes the output canvas size, paints its background, and draws every
+ * uploaded image with its selected scale, rotation, and flip transformations.
+ *
+ * @param canvas Canvas element that receives the rendered output.
+ * @param items Uploaded images and their per-image transformations.
+ * @param settings Global layout, sizing, and background settings.
+ * @returns The rendered canvas dimensions in pixels.
+ */
 export function renderMergedCanvas(
   canvas: HTMLCanvasElement,
   items: ImageItem[],
@@ -57,7 +94,7 @@ export function renderMergedCanvas(
     canvas.height = 420;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw modern empty state canvas placeholder
+    // Draw a helpful placeholder while no source images are available.
     ctx.fillStyle = '#1e293b';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -80,7 +117,7 @@ export function renderMergedCanvas(
     settings.customColumns
   );
 
-  // Prepare aspect ratios and native dimensions for items
+  // Resolve each image's dimensions after accounting for quarter-turn rotation.
   const itemDimensions = items.map((item) => {
     const isRotated90or270 = item.rotation % 180 !== 0;
     const nativeW = isRotated90or270 ? item.originalHeight : item.originalWidth;
@@ -96,7 +133,7 @@ export function renderMergedCanvas(
     };
   });
 
-  // Calculate target heights & widths based on standardization setting and layout mode
+  // Calculate standardized target dimensions before deriving each image's cell size.
   let targetHeights: number[] = new Array(items.length).fill(0);
   let targetWidths: number[] = new Array(items.length).fill(0);
 
@@ -164,7 +201,7 @@ export function renderMergedCanvas(
     };
   });
 
-  // Calculate cell widths and heights
+  // Each grid cell must accommodate the largest effective image assigned to it.
   const colWidths: number[] = new Array(columns).fill(0);
   const rowHeights: number[] = new Array(rows).fill(0);
 
@@ -189,7 +226,7 @@ export function renderMergedCanvas(
   canvas.width = Math.max(1, canvasWidth);
   canvas.height = Math.max(1, canvasHeight);
 
-  // Background rendering
+  // Clear transparent output or paint a solid background color.
   if (settings.backgroundColor === 'transparent') {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   } else {
@@ -197,7 +234,7 @@ export function renderMergedCanvas(
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
-  // Draw images inside grid cells
+  // Center each transformed image inside its calculated grid cell.
   computedItems.forEach((cItem, index) => {
     const col = index % columns;
     const row = Math.floor(index / columns);

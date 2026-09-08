@@ -1,6 +1,18 @@
+/**
+ * User-interface controller for uploads, image transformations, settings, and exports.
+ *
+ * @author kimpro82
+ * @date 2026.09.08
+ * @history
+ * 2026.09.06 - Added the initial upload, transform, preview, and export workflows.
+ * 2026.09.07 - Added standardization and aspect-ratio controls to the UI.
+ * 2026.09.08 - Added collapsible panels, batch reset, and expanded grayscale color presets.
+ */
+
 import { CanvasSettings, ImageItem, LayoutMode, ExportFormat, SizeStandardization } from './types';
 import { renderMergedCanvas } from './canvasRenderer';
 
+/** Coordinates the image-merging UI, application state, and canvas rendering. */
 export class ImageMergerApp {
   private items: ImageItem[] = [];
   private settings: CanvasSettings = {
@@ -16,9 +28,11 @@ export class ImageMergerApp {
     allowAspectDistortion: false,
   };
 
-  private zoomLevel: number = 1.0; // 1.0 = Fit screen / natural
+  /** 1.0 represents the fit-to-screen view; other values are explicit zoom levels. */
+  private zoomLevel: number = 1.0;
   private canvas: HTMLCanvasElement;
 
+  /** Locate the canvas, register UI handlers, and render the initial empty state. */
   constructor() {
     this.canvas = document.getElementById('output-canvas') as HTMLCanvasElement;
 
@@ -26,6 +40,7 @@ export class ImageMergerApp {
     this.renderCanvas();
   }
 
+  /** Register handlers for panel toggles, controls, image actions, and exports. */
   private initEventListeners(): void {
     document.querySelectorAll('.panel-toggle').forEach((toggle) => {
       toggle.addEventListener('click', () => {
@@ -37,7 +52,7 @@ export class ImageMergerApp {
       });
     });
 
-    // 1. File Upload & Drag & Drop
+    // File upload and drag-and-drop handlers.
     const fileInput = document.getElementById('file-input') as HTMLInputElement;
     const dropZone = document.getElementById('drop-zone') as HTMLElement;
 
@@ -45,7 +60,7 @@ export class ImageMergerApp {
       const files = (e.target as HTMLInputElement).files;
       if (files && files.length > 0) {
         this.handleFiles(Array.from(files));
-        fileInput.value = ''; // reset input
+        fileInput.value = ''; // Allow the same file to be selected again later.
       }
     });
 
@@ -66,7 +81,7 @@ export class ImageMergerApp {
       }
     });
 
-    // 2. Layout Mode Buttons
+    // Layout mode selection.
     const layoutBtns = document.querySelectorAll('#layout-mode-group .segment-btn');
     const customColsGroup = document.getElementById('group-custom-cols') as HTMLElement;
 
@@ -88,7 +103,7 @@ export class ImageMergerApp {
       });
     });
 
-    // 3. Size Standardization Buttons (Prevent Crop)
+    // Size standardization selection.
     const standardBtns = document.querySelectorAll('#size-standardization-group .segment-btn');
     standardBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -101,14 +116,14 @@ export class ImageMergerApp {
       });
     });
 
-    // 4. Allow Aspect Ratio Distortion Checkbox
+    // Aspect-ratio distortion toggle.
     const chkDistortion = document.getElementById('chk-allow-distortion') as HTMLInputElement;
     chkDistortion?.addEventListener('change', () => {
       this.settings.allowAspectDistortion = chkDistortion.checked;
       this.renderCanvas();
     });
 
-    // Custom Columns Slider
+    // Custom column count slider.
     const colsInput = document.getElementById('input-cols') as HTMLInputElement;
     const colsVal = document.getElementById('val-cols') as HTMLElement;
     colsInput.addEventListener('input', () => {
@@ -118,7 +133,7 @@ export class ImageMergerApp {
       this.renderCanvas();
     });
 
-    // Spacing Slider
+    // Inter-image spacing slider.
     const spacingInput = document.getElementById('input-spacing') as HTMLInputElement;
     const spacingVal = document.getElementById('val-spacing') as HTMLElement;
     spacingInput.addEventListener('input', () => {
@@ -128,7 +143,7 @@ export class ImageMergerApp {
       this.renderCanvas();
     });
 
-    // Padding Slider
+    // Outer canvas padding slider.
     const paddingInput = document.getElementById('input-padding') as HTMLInputElement;
     const paddingVal = document.getElementById('val-padding') as HTMLElement;
     paddingInput.addEventListener('input', () => {
@@ -138,7 +153,7 @@ export class ImageMergerApp {
       this.renderCanvas();
     });
 
-    // Background Color Presets & Picker
+    // Background color presets and custom color picker.
     const colorPresetBtns = document.querySelectorAll('.color-preset-btn');
     const customColorInput = document.getElementById('input-bg-color') as HTMLInputElement;
 
@@ -159,7 +174,7 @@ export class ImageMergerApp {
       this.renderCanvas();
     });
 
-    // Export Format & Quality
+    // Export format and quality controls.
     const selectFormat = document.getElementById('select-format') as HTMLSelectElement;
     const qualityGroup = document.getElementById('group-quality') as HTMLElement;
     const qualityInput = document.getElementById('input-quality') as HTMLInputElement;
@@ -182,7 +197,7 @@ export class ImageMergerApp {
       qualityVal.textContent = `${val}%`;
     });
 
-    // Action Buttons
+    // Primary actions.
     const btnDownloadTop = document.getElementById('btn-download-top');
     const btnDownloadSide = document.getElementById('btn-download-side');
     const btnCopyClipboard = document.getElementById('btn-copy-clipboard');
@@ -195,7 +210,7 @@ export class ImageMergerApp {
     btnClearAll?.addEventListener('click', () => this.clearAll());
     btnResetItems?.addEventListener('click', () => this.resetItemSettings());
 
-    // Zoom Controls
+    // Preview zoom controls.
     const btnZoomIn = document.getElementById('btn-zoom-in');
     const btnZoomOut = document.getElementById('btn-zoom-out');
     const btnZoomFit = document.getElementById('btn-zoom-fit');
@@ -205,6 +220,10 @@ export class ImageMergerApp {
     btnZoomFit?.addEventListener('click', () => this.resetZoom());
   }
 
+  /**
+   * Read image files, discard non-image inputs, and append decoded images to
+   * the current collection once all selected files have finished loading.
+   */
   private handleFiles(files: File[]): void {
     const validFiles = files.filter((f) => f.type.startsWith('image/'));
 
@@ -245,6 +264,7 @@ export class ImageMergerApp {
     });
   }
 
+  /** Rebuild the uploaded-image list and bind controls for each rendered card. */
   private renderItemList(): void {
     const itemsListContainer = document.getElementById('items-list') as HTMLElement;
     const countBadge = document.getElementById('items-count-badge') as HTMLElement;
@@ -307,7 +327,7 @@ export class ImageMergerApp {
         </div>
       `;
 
-      // Event Listeners for Item Controls
+      // Bind controls created with the card markup.
       const scaleSlider = card.querySelector('.scale-slider') as HTMLInputElement;
       scaleSlider.addEventListener('input', (e) => {
         const val = parseFloat((e.target as HTMLInputElement).value);
@@ -352,7 +372,7 @@ export class ImageMergerApp {
         });
       });
 
-      // Item Drag and Drop reordering
+      // Support reordering cards through native HTML drag and drop.
       card.addEventListener('dragstart', (e) => {
         card.classList.add('dragging');
         if (e.dataTransfer) {
@@ -387,10 +407,11 @@ export class ImageMergerApp {
     });
   }
 
+  /** Render the merged canvas and update its displayed dimensions and aspect ratio. */
   private renderCanvas(): void {
     const { width, height } = renderMergedCanvas(this.canvas, this.items, this.settings);
 
-    // Update Dimensions and Aspect Ratio text
+    // Update the dimensions and aspect-ratio labels beside the preview.
     const dimensionsVal = document.getElementById('val-dimensions');
     const aspectVal = document.getElementById('val-aspect');
 
@@ -405,20 +426,24 @@ export class ImageMergerApp {
     this.applyZoom();
   }
 
+  /** Return the greatest common divisor used to simplify an aspect ratio. */
   private gcd(a: number, b: number): number {
     return b === 0 ? a : this.gcd(b, a % b);
   }
 
+  /** Adjust the zoom level by a bounded increment and apply it to the preview. */
   private changeZoom(delta: number): void {
     this.zoomLevel = Math.min(3.0, Math.max(0.2, this.zoomLevel + delta));
     this.applyZoom();
   }
 
+  /** Restore the fit-to-screen preview zoom. */
   private resetZoom(): void {
     this.zoomLevel = 1.0;
     this.applyZoom();
   }
 
+  /** Apply either fit-to-screen sizing or an explicit pixel zoom to the canvas. */
   private applyZoom(): void {
     const zoomVal = document.getElementById('val-zoom');
     const canvasWrapper = this.canvas.parentElement as HTMLElement;
@@ -441,6 +466,7 @@ export class ImageMergerApp {
     }
   }
 
+  /** Encode the rendered canvas and trigger a download using the selected format. */
   private downloadCanvas(): void {
     if (this.items.length === 0) {
       this.showToast('다운로드할 이미지를 1개 이상 추가해주세요.', 'error');
@@ -464,6 +490,7 @@ export class ImageMergerApp {
     this.showToast(`이미지 다운로드 시작: ${filename}`, 'success');
   }
 
+  /** Copy the rendered PNG to the system clipboard when browser support is available. */
   private async copyToClipboard(): Promise<void> {
     if (this.items.length === 0) {
       this.showToast('클립보드에 복사할 이미지를 1개 이상 추가해주세요.', 'error');
@@ -495,6 +522,7 @@ export class ImageMergerApp {
     }
   }
 
+  /** Remove every uploaded image after asking the user for confirmation. */
   private clearAll(): void {
     if (this.items.length === 0) return;
 
@@ -506,6 +534,7 @@ export class ImageMergerApp {
     }
   }
 
+  /** Restore every uploaded image's scale, flips, and rotation to their defaults. */
   private resetItemSettings(): void {
     if (this.items.length === 0) return;
 
@@ -521,6 +550,7 @@ export class ImageMergerApp {
     this.showToast('모든 이미지 설정이 기본값으로 초기화되었습니다.', 'success');
   }
 
+  /** Display a temporary success or error notification in the toast container. */
   private showToast(message: string, type: 'success' | 'error' = 'success'): void {
     const container = document.getElementById('toast-container');
     if (!container) return;
