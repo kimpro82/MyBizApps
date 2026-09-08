@@ -512,13 +512,15 @@ body {
 .color-picker-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
+  width: 100%;
 }
 
 .color-preset-btn {
-  width: 32px;
+  flex: 1;
   height: 32px;
-  border-radius: 50%;
+  min-width: 0;
+  border-radius: 6px;
   border: 2px solid transparent;
   cursor: pointer;
   overflow: hidden;
@@ -531,7 +533,7 @@ body {
 }
 
 .color-preset-btn:hover {
-  transform: scale(1.1);
+  transform: translateY(-1px);
 }
 
 .color-preset-btn.active {
@@ -542,14 +544,14 @@ body {
 .color-sample {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: 3px;
   border: 1px solid var(--border-color);
 }
 
 .checkerboard-sample {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: 3px;
   background-image: conic-gradient(#cbd5e1 90deg, #fff 90deg 180deg, #cbd5e1 180deg 270deg, #fff 270deg);
   background-size: 10px 10px;
   border: 1px solid var(--border-color);
@@ -557,21 +559,29 @@ body {
 
 .color-custom-wrapper {
   position: relative;
-  width: 32px;
+  flex: 1;
+  min-width: 0;
   height: 32px;
-  border-radius: 50%;
+  border-radius: 6px;
   overflow: hidden;
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
+  background: conic-gradient(from 45deg, #ef4444, #f59e0b, #facc15, #22c55e, #06b6d4, #3b82f6, #8b5cf6, #ec4899, #ef4444);
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.color-custom-wrapper:hover {
+  transform: translateY(-1px);
+  border-color: var(--text-main);
 }
 
 .color-custom-wrapper input[type="color"] {
   position: absolute;
-  top: -6px;
-  left: -6px;
-  width: 44px;
-  height: 44px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
   border: none;
+  opacity: 0;
 }
 
 /* Image Items List */
