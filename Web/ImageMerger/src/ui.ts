@@ -27,16 +27,6 @@ export class ImageMergerApp {
   }
 
   private initEventListeners(): void {
-    // Sidebar collapse control
-    const sidebar = document.querySelector('.sidebar') as HTMLElement;
-    const toggleSidebar = document.getElementById('btn-toggle-sidebar') as HTMLButtonElement;
-    toggleSidebar?.addEventListener('click', () => {
-      const isCollapsed = sidebar.classList.toggle('collapsed');
-      toggleSidebar.setAttribute('aria-expanded', String(!isCollapsed));
-      toggleSidebar.setAttribute('aria-label', isCollapsed ? '메뉴 펼치기' : '메뉴 접기');
-      toggleSidebar.title = isCollapsed ? '메뉴 펼치기' : '메뉴 접기';
-    });
-
     document.querySelectorAll('.panel-toggle').forEach((toggle) => {
       toggle.addEventListener('click', () => {
         const panel = toggle.closest('.panel');
