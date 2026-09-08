@@ -27,6 +27,16 @@ export class ImageMergerApp {
   }
 
   private initEventListeners(): void {
+    // Sidebar collapse control
+    const sidebar = document.querySelector('.sidebar') as HTMLElement;
+    const toggleSidebar = document.getElementById('btn-toggle-sidebar') as HTMLButtonElement;
+    toggleSidebar?.addEventListener('click', () => {
+      const isCollapsed = sidebar.classList.toggle('collapsed');
+      toggleSidebar.setAttribute('aria-expanded', String(!isCollapsed));
+      toggleSidebar.setAttribute('aria-label', isCollapsed ? '메뉴 펼치기' : '메뉴 접기');
+      toggleSidebar.title = isCollapsed ? '메뉴 펼치기' : '메뉴 접기';
+    });
+
     // 1. File Upload & Drag & Drop
     const fileInput = document.getElementById('file-input') as HTMLInputElement;
     const dropZone = document.getElementById('drop-zone') as HTMLElement;
