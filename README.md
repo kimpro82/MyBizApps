@@ -26,7 +26,7 @@
 
 ## [Web](#list)
 
-  - [Image Merger v1.0 Beta](./Web/ImageMerger/README.md)
+  - [Image Merger v1.0 Beta (2026.09.08)](./Web/ImageMerger/README.md)
 
 
 ## [VBA](#list)
