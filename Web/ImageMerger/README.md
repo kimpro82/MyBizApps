@@ -5,6 +5,8 @@
 A browser-based image merger and grid layout utility built with TypeScript and Vite.
 All image processing is performed locally in the browser; source images are not uploaded to a server.
 
+![Image Merger](./images/ImageMerger.PNG)
+
 ### <List>
 
 - [Features](#features)
