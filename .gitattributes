@@ -1,3 +1,6 @@
 /GithubStatistics/GithubAPI/*.js linguist-vendored
+/Web/ImageMerger/*.js linguist-vendored
 
 *.bas linguist-language=VBA
+*.ico linguist-language=SVG
+

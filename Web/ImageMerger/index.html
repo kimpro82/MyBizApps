@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ImageMerger - 브라우저 기반 이미지 병합 & 그리드 도구</title>
+    <meta name="description" content="여러 이미지를 서버 업로드 없이 브라우저에서 간편하게 합치고 그리드로 배치하는 이미지 병합 도구" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app" class="app-container">
+      <!-- App Header -->
+      <header class="app-header">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <div>
+            <h1 class="brand-title">ImageMerger</h1>
+            <p class="brand-subtitle">브라우저 전용 이미지 병합 & 그리드 유틸리티</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="btn-clear-all" class="btn btn-ghost danger" title="모든 이미지 삭제">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            전체 삭제
+          </button>
+          <button id="btn-copy-clipboard" class="btn btn-secondary" title="합쳐진 이미지를 클립보드에 복사">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            클립보드 복사
+          </button>
+          <button id="btn-download-top" class="btn btn-primary" title="병합 이미지 다운로드">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            이미지 다운로드
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Workspace -->
+      <main class="workspace">
+        <!-- Control Sidebar -->
+        <aside class="sidebar">
+          <!-- Section 1: Upload Zone -->
+          <section class="panel upload-panel">
+            <h2 class="panel-title">
+              <button type="button" class="panel-toggle" aria-expanded="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                이미지 추가
+                <svg class="panel-toggle-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+            </h2>
+            <div id="drop-zone" class="drop-zone">
+              <input type="file" id="file-input" multiple accept="image/png, image/jpeg, image/webp, image/gif, image/svg+xml, image/avif" class="file-input-hidden" />
+              <div class="drop-zone-content">
+                <div class="drop-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                </div>
+                <p class="drop-title">이미지 파일을 여기에 드래그하세요</p>
+                <p class="drop-sub">또는 클릭하여 파일 선택 (다중 선택 가능)</p>
+                <div class="supported-formats">
+                  <span class="format-tag">PNG</span>
+                  <span class="format-tag">JPG</span>
+                  <span class="format-tag">WebP</span>
+                  <span class="format-tag">GIF</span>
+                  <span class="format-tag">SVG</span>
+                  <span class="format-tag">AVIF</span>
+                </div>
+            </div>
+            </div>
+          </section>
+
+          <!-- Section 2: Layout & Canvas Controls -->
+          <section class="panel layout-panel collapsed">
+            <h2 class="panel-title">
+              <button type="button" class="panel-toggle" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+                레이아웃 및 여백 설정
+                <svg class="panel-toggle-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+            </h2>
+
+            <div class="control-group">
+              <label class="control-label">배치 모드</label>
+              <div class="segmented-control" id="layout-mode-group">
+                <button type="button" class="segment-btn active" data-mode="auto" title="이미지 수에 맞는 자동 비율 그리드">
+                  <span>자동 그리드</span>
+                </button>
+                <button type="button" class="segment-btn" data-mode="horizontal" title="가로 1줄 정렬">
+                  <span>가로 병합</span>
+                </button>
+                <button type="button" class="segment-btn" data-mode="vertical" title="세로 1열 정렬">
+                  <span>세로 병합</span>
+                </button>
+                <button type="button" class="segment-btn" data-mode="custom" title="열 개수 직접 지정">
+                  <span>커스텀</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Size Standardization (Prevent Crop) -->
+            <div class="control-group">
+              <label class="control-label">크기 표준화 (길이 자동 맞춤)</label>
+              <div class="segmented-control vertical-stack" id="size-standardization-group">
+                <button type="button" class="segment-btn active" data-standard="outlierMax" title="가로 병합시 높이 통일 / 세로 병합시 너비 통일 (아웃라이어 제외)">
+                  <span>아웃라이어 제외 크기 통일</span>
+                </button>
+                <button type="button" class="segment-btn" data-standard="rowEqualize" title="각 줄(행/열) 내부 크기를 균일화">
+                  <span>줄 단위 크기 균일화</span>
+                </button>
+                <button type="button" class="segment-btn" data-standard="original" title="개별 이미지 원본 해상도/배율 유지">
+                  <span>원본 크기 유지</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Allow Aspect Ratio Distortion -->
+            <div class="control-group">
+              <label class="checkbox-label" for="chk-allow-distortion" title="체크 시 이미지의 비율을 변형하여 가로/세로 크기가 딱 떨어지도록 꽉 채웁니다.">
+                <input type="checkbox" id="chk-allow-distortion" class="checkbox-input" />
+                <span>가로세로 비율 변화 허용 (강제 맞춤)</span>
+              </label>
+              <p class="control-hint">체크 시 비율 왜곡을 허용하여 빈틈 없이 크기를 딱 맞춥니다.</p>
+            </div>
+
+            <!-- Custom columns (hidden unless custom mode selected) -->
+            <div class="control-group" id="group-custom-cols" style="display: none;">
+              <div class="control-header">
+                <label for="input-cols" class="control-label">그리드 열(Column) 개수</label>
+                <span class="control-value" id="val-cols">3개</span>
+              </div>
+              <input type="range" id="input-cols" min="1" max="10" value="3" class="range-input" />
+            </div>
+
+            <!-- Spacing / Gap -->
+            <div class="control-group">
+              <div class="control-header">
+                <label for="input-spacing" class="control-label">이미지 사이 간격 (Gap)</label>
+                <span class="control-value" id="val-spacing">10 px</span>
+              </div>
+              <input type="range" id="input-spacing" min="0" max="100" value="10" class="range-input" />
+            </div>
+
+            <!-- Outer Padding -->
+            <div class="control-group">
+              <div class="control-header">
+                <label for="input-padding" class="control-label">캔버스 외곽 여백 (Padding)</label>
+                <span class="control-value" id="val-padding">10 px</span>
+              </div>
+              <input type="range" id="input-padding" min="0" max="100" value="10" class="range-input" />
+            </div>
+
+            <!-- Background Color -->
+            <div class="control-group">
+              <label class="control-label">배경색 설정</label>
+              <div class="color-picker-row">
+                <button type="button" class="color-preset-btn active" data-color="transparent" title="투명 배경">
+                  <span class="checkerboard-sample"></span>
+                </button>
+                <button type="button" class="color-preset-btn" data-color="#ffffff" title="흰색 배경">
+                  <span class="color-sample" style="background-color: #ffffff;"></span>
+                </button>
+                <button type="button" class="color-preset-btn" data-color="#e5e7eb" title="아주 밝은 회색 배경">
+                  <span class="color-sample" style="background-color: #e5e7eb;"></span>
+                </button>
+                <button type="button" class="color-preset-btn" data-color="#d1d5db" title="밝은 회색 배경">
+                  <span class="color-sample" style="background-color: #d1d5db;"></span>
+                </button>
+                <button type="button" class="color-preset-btn" data-color="#9ca3af" title="중간 밝기 회색 배경">
+                  <span class="color-sample" style="background-color: #9ca3af;"></span>
+                </button>
+                <button type="button" class="color-preset-btn" data-color="#6b7280" title="중간 회색 배경">
+                  <span class="color-sample" style="background-color: #6b7280;"></span>
+                </button>
+                <button type="button" class="color-preset-btn" data-color="#4b5563" title="어두운 회색 배경">
+                  <span class="color-sample" style="background-color: #4b5563;"></span>
+                </button>
+                <button type="button" class="color-preset-btn" data-color="#1f2937" title="아주 어두운 회색 배경">
+                  <span class="color-sample" style="background-color: #1f2937;"></span>
+                </button>
+                <button type="button" class="color-preset-btn" data-color="#000000" title="검은색 배경">
+                  <span class="color-sample" style="background-color: #000000;"></span>
+                </button>
+                <div class="color-custom-wrapper" title="색상 피커 열기">
+                  <input type="color" id="input-bg-color" value="#ffffff" title="색상 피커 열기" />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 3: Export Configuration -->
+          <section class="panel export-panel collapsed">
+              <h2 class="panel-title">
+                <button type="button" class="panel-toggle" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                  저장 및 내보내기 설정
+                  <svg class="panel-toggle-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+            </h2>
+
+            <div class="control-group">
+              <label for="select-format" class="control-label">저장 포맷</label>
+              <select id="select-format" class="select-input">
+                <option value="image/png">PNG (무손실 & 투명 지원)</option>
+                <option value="image/jpeg">JPEG (용량 압축)</option>
+                <option value="image/webp">WebP (고효율 모던 포맷)</option>
+              </select>
+            </div>
+
+            <div class="control-group" id="group-quality" style="display: none;">
+              <div class="control-header">
+                <label for="input-quality" class="control-label">압축 품질</label>
+                <span class="control-value" id="val-quality">92%</span>
+              </div>
+              <input type="range" id="input-quality" min="10" max="100" value="92" class="range-input" />
+            </div>
+
+            <div class="control-group">
+              <label for="input-filename" class="control-label">저장 파일명</label>
+              <input type="text" id="input-filename" value="merged-image" class="text-input" placeholder="예: 병합이미지" />
+            </div>
+
+            <button id="btn-download-side" class="btn btn-primary btn-full">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+              병합 이미지 다운로드
+            </button>
+          </section>
+
+          <!-- Section 4: Individual Image Management -->
+          <section class="panel items-panel collapsed">
+            <div class="panel-header-with-count">
+              <h2 class="panel-title">
+                <button type="button" class="panel-toggle" aria-expanded="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                  업로드된 이미지 목록
+                  <svg class="panel-toggle-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+              </h2>
+              <div class="panel-header-actions">
+                <span id="items-count-badge" class="count-badge">0개</span>
+                <button type="button" id="btn-reset-items" class="btn btn-ghost btn-xs" title="모든 이미지 설정을 기본값으로 초기화">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+                  초기화
+                </button>
+              </div>
+            </div>
+
+            <div id="items-list" class="items-list">
+              <!-- 동적으로 생성되는 이미지 카드 -->
+              <div class="empty-list-message">
+                <p>업로드된 이미지가 없습니다.</p>
+              </div>
+            </div>
+          </section>
+        </aside>
+
+        <!-- Preview Canvas Area -->
+        <section class="preview-area">
+          <div class="preview-toolbar">
+            <div class="canvas-info">
+              <span class="info-tag" id="canvas-size-tag" title="캔버스 해상도">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
+                <span id="val-dimensions">0 x 0 px</span>
+              </span>
+              <span class="info-tag" id="canvas-aspect-tag" title="캔버스 비율">
+                <span id="val-aspect">0:0</span>
+              </span>
+            </div>
+            
+            <div class="zoom-controls">
+              <button type="button" id="btn-zoom-out" class="icon-btn" title="축소">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+              </button>
+              <span id="val-zoom" class="zoom-text">자동 맞춤</span>
+              <button type="button" id="btn-zoom-in" class="icon-btn" title="확대">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+              </button>
+              <button type="button" id="btn-zoom-fit" class="btn btn-ghost btn-xs" title="화면 크기에 맞게 자동 리셋">화면 맞춤</button>
+            </div>
+          </div>
+
+          <div id="canvas-viewport" class="canvas-viewport">
+            <div class="canvas-wrapper">
+              <canvas id="output-canvas"></canvas>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
